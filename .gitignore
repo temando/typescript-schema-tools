@@ -1,0 +1,11 @@
+node_modules
+npm-*
+yarn-*
+.serverless
+serverless.env.yml
+/.vscode
+/dist
+.directory
+.DS_STORE*
+yarn-error.log
+.coverage

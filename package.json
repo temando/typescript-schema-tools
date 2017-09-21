@@ -1,0 +1,41 @@
+{
+  "name": "@temando/schema-tools",
+  "description": "Schema tooling",
+  "version": "0.0.1",
+  "license": "SEE LICENSE IN LICENCE.md",
+  "keywords": [
+    "library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "jest src",
+    "coverage": "jest src --coverage",
+    "test:dist": "jest dist",
+    "lint": "tslint --project tsconfig.json --type-check",
+    "release": "cd dist && npm publish",
+    "build": "bash -v -e scripts/build",
+    "build:link": "yarn build && cd dist && yarn link",
+    "preversion": "yarn lint && yarn build && yarn test:dist && changelog-verify CHANGELOG.md",
+    "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.28",
+    "changelog-verify": "^1.0.4",
+    "jest": "^21.1.0",
+    "ts-jest": "^21.0.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "tslint-config-temando": "^1.5.0",
+    "typescript": "^2.5.2",
+    "typescript-json-schema": "^0.16.0",
+    "version-changelog": "^2.1.0"
+  },
+  "dependencies": {
+    "@jdw/jst": "^2.0.0-beta.12",
+    "@types/jest": "^20.0.8",
+    "bluebird": "^3.5.0"
+  }
+}

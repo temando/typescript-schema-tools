@@ -1,0 +1,38 @@
+image: registry.temando.io/continuous-integration/node
+
+stages:
+  - build
+  - test
+  - publish
+
+before_script:
+  - npm_register ${NPM_TOKEN} -s @temando
+
+build:
+  stage: build
+  script:
+    - source scripts/prepare
+    - source scripts/build
+  artifacts:
+    paths:
+      - node_modules/
+      - dist/
+
+lint:
+  stage: test
+  script:
+    - yarn lint
+
+units:
+  stage: test
+  script:
+    - yarn test:dist
+    - yarn coverage
+
+publish:
+  stage: publish
+  script:
+    - yarn release
+  only:
+    - tags@service-library/schema-tools
+

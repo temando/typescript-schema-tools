@@ -1,0 +1,6 @@
+**/__tests__/**
+/.*
+/yarn*
+/jest*
+/tsconfig.json
+/tslint.json
