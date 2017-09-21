@@ -56,6 +56,7 @@ export async function typeToSchema ({ fromFiles, types, id, options }: {
 }
 
 export async function saveSchema ({ schemas, directory, name, format, asDefaultExport }: {
+  /** The file format to save as  */
   format: 'ts' | 'json';
 
   /**
@@ -76,6 +77,7 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
   if (!schemas.length) { return; }
 
   await mkdirs(directory);
+
   const filePath = join(directory, `${name}.${format}`);
 
   let file;
@@ -88,6 +90,9 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
   await writeFile(filePath, file);
 }
 
+/**
+ * Creates
+ */
 export async function saveExports ({ exports, directory, name, getImportPath }: {
   /** Names of export names */
   exports: string[],
