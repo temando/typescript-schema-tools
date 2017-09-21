@@ -4,7 +4,7 @@ import { join } from 'path';
 import * as TJS from 'typescript-json-schema';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './typescript/schemaRenderers';
 
-export interface ISchemaResult {
+export interface ITjsSchema {
   key: string;
   type: string;
   schema: any;
@@ -28,31 +28,36 @@ export async function typeToSchema ({ fromFiles, types, id, options }: {
 
   /** TJS options to override */
   options: Partial<TJS.Args>,
-}): Promise<ISchemaResult[]> {
+}): Promise<{
+  errors: Error[];
+  schemas: ITjsSchema[];
+}> {
   const program = TJS.getProgramFromFiles(fromFiles);
 
-  const schemas: ISchemaResult[] = [];
+  const schemas: ITjsSchema[] = [];
+  const errors: Error[] = [];
 
   Object.keys(types).forEach((key) => {
     const type = types[key];
 
-    let schema;
+    let schema: any;
 
     try {
       schema = TJS.generateSchema(program, type, {
-        ...defaultOptions
+        ...defaultOptions,
         ...options,
       });
-
-      schema.id = schema.id || id;
-    } catch { return; }
+    } catch (error) {
+      errors.push(error);
+    }
 
     if (schema) {
-      schemas.push({ key, type, schema: dereference(schema, null) });
+      schema.id = schema.id || id;
+      schemas.push({ key, type, schema: dereference(schema, undefined as any) });
     }
   });
 
-  return schemas;
+  return { errors, schemas };
 }
 
 export async function saveSchema ({ schemas, directory, name, format, asDefaultExport }: {

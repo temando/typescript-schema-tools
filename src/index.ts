@@ -1,1 +1,1 @@
-export * from './typeScriptToJsonSchema';
+export * from './typeToSchema';
