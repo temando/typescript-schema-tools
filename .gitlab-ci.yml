@@ -16,7 +16,7 @@ build:
   artifacts:
     paths:
       - node_modules/
-      - dist/
+      - build/
 
 lint:
   stage: test
@@ -26,7 +26,7 @@ lint:
 units:
   stage: test
   script:
-    - yarn test:dist
+    - yarn test:build
     - yarn coverage
 
 publish:

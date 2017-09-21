@@ -3,21 +3,19 @@
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./dist",
+    "outDir": "./build",
     "declaration": true,
     "sourceMap": true,
-    "allowSyntheticDefaultImports": false,
+    "strict": true,
     "pretty": true,
-    "noUnusedLocals": true,
     "lib": [
       "es2015",
-      "esnext.asynciterable",
       "dom"
     ]
   },
   "exclude": [
-    "dist/**/*",
-    "src/test/integration/**/*"
+    "node_modules",
+    "build/**/*"
   ],
   "include": [
     "src/**/*"

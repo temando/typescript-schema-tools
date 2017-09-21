@@ -4,7 +4,7 @@ yarn-*
 .serverless
 serverless.env.yml
 /.vscode
-/dist
+/build
 .directory
 .DS_STORE*
 yarn-error.log

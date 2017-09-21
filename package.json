@@ -13,12 +13,12 @@
   "scripts": {
     "test": "jest src",
     "coverage": "jest src --coverage",
-    "test:dist": "jest dist",
+    "test:build": "jest build",
     "lint": "tslint --project tsconfig.json --type-check",
-    "release": "cd dist && npm publish",
+    "release": "cd build && npm publish",
     "build": "bash -v -e scripts/build",
-    "build:link": "yarn build && cd dist && yarn link",
-    "preversion": "yarn lint && yarn build && yarn test:dist && changelog-verify CHANGELOG.md",
+    "build:link": "yarn build && cd build && yarn link",
+    "preversion": "yarn lint && yarn build && yarn test:build && changelog-verify CHANGELOG.md",
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md"
   },
   "devDependencies": {
