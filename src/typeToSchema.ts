@@ -91,7 +91,7 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
 }
 
 /**
- * Creates
+ * Creates an index file wiring up imports
  */
 export async function saveExports ({ exports, directory, name, getImportPath }: {
   /** Names of export names */
