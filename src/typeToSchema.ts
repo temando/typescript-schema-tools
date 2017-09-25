@@ -16,7 +16,7 @@ export const defaultOptions: Partial<TJS.Args> = {
   ignoreErrors: true, // Remove when we upgrade
 };
 
-export async function typeToSchema ({ fromFiles, types, id, options }: {
+export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
   /** The TS files to fetch types from */
   fromFiles: string[];
 
@@ -27,9 +27,9 @@ export async function typeToSchema ({ fromFiles, types, id, options }: {
   id?: string;
 
   /** TJS options to override */
-  options: Partial<TJS.Args>,
+  options?: Partial<TJS.Args>,
 }): Promise<{
-  errors: Error[];
+  errors?: Error[];
   schemas: ITjsSchema[];
 }> {
   const program = TJS.getProgramFromFiles(fromFiles);
@@ -57,7 +57,7 @@ export async function typeToSchema ({ fromFiles, types, id, options }: {
     }
   });
 
-  return { errors, schemas };
+  return { errors: errors.length ? errors : undefined, schemas };
 }
 
 export async function saveSchema ({ schemas, directory, name, format, asDefaultExport }: {
