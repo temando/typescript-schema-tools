@@ -1,6 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ITestSnapshot 1`] = `
+exports[`multipleSchemas 1`] = `
+Array [
+  Object {
+    "key": "Test",
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "id": undefined,
+      "properties": Object {
+        "a": Object {
+          "description": "a",
+          "minimum": 1,
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+    "type": "ITest",
+  },
+  Object {
+    "key": "Test2",
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "id": undefined,
+      "properties": Object {
+        "c": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "c",
+      ],
+      "type": "object",
+    },
+    "type": "ITest2",
+  },
+]
+`;
+
+exports[`singleSchema 1`] = `
 Object {
   "key": "Test",
   "schema": Object {
