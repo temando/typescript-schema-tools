@@ -1,4 +1,4 @@
-import { mkdir, remove, unlink } from 'fs-extra';
+import { mkdir, remove } from 'fs-extra';
 import { join } from 'path';
 import { ITjsSchema, saveExports, saveSchema, typeToSchema } from '..';
 
