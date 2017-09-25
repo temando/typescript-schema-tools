@@ -6,6 +6,10 @@ export interface ITjsSchema {
     schema: any;
 }
 export declare const defaultOptions: Partial<TJS.Args>;
+/**
+ * Reads TypeScript files using `typescript-json-schema` and returns both
+ * errors and the resulting schemas.
+ */
 export declare function typeToSchema({fromFiles, types, id, options}: {
     /** The TS files to fetch types from */
     fromFiles: string[];
@@ -21,6 +25,9 @@ export declare function typeToSchema({fromFiles, types, id, options}: {
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
+/**
+ * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
+ */
 export declare function saveSchema({schemas, directory, name, format, asDefaultExport}: {
     /** The file format to save as  */
     format: 'ts' | 'json';
@@ -37,7 +44,7 @@ export declare function saveSchema({schemas, directory, name, format, asDefaultE
     schemas: ITjsSchema[];
 }): Promise<void>;
 /**
- * Creates an index file wiring up imports
+ * Creates an index file wiring up imports and exports
  */
 export declare function saveExports({exports, directory, name, getImportPath, getImportPattern}: {
     /** Names of export names */
