@@ -57,7 +57,10 @@ export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
     }
   });
 
-  return { errors: errors.length ? errors : undefined, schemas };
+  return {
+    errors: errors.length ? errors : undefined,
+    schemas,
+  };
 }
 
 export async function saveSchema ({ schemas, directory, name, format, asDefaultExport = false }: {
@@ -77,7 +80,7 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
   /** The absolute path to the save directory */
   directory: string;
 
-  schemas: any[];
+  schemas: ITjsSchema[];
 }) {
   if (!schemas.length) { return; }
   if (asDefaultExport && schemas.length > 1) {
@@ -101,12 +104,15 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
 /**
  * Creates an index file wiring up imports
  */
-export async function saveExports ({ exports, directory, name, getImportPath }: {
+export async function saveExports ({ exports, directory, name, getImportPath, getImportPattern }: {
   /** Names of export names */
   exports: string[],
 
   /** Should return a valid relative import path for the destination directory */
   getImportPath: IGetImportPath
+
+  /** (Optional) Defaults to returning `* as ${name}` in an import statement. Must resolve to a single `name` */
+  getImportPattern?: IGetImportPath
 
   /** Save directory */
   directory: string;
@@ -115,7 +121,7 @@ export async function saveExports ({ exports, directory, name, getImportPath }: 
 }) {
   await mkdirs(directory);
 
-  const file = renderExportsToTs(exports, getImportPath);
+  const file = renderExportsToTs(exports, { getImportPath, getImportPattern });
   const filePath = join(directory, `${name}.ts`);
 
   await writeFile(filePath, file);

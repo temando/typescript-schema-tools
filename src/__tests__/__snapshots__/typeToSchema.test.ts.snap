@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`manySchemas 1`] = `
+Object {
+  "Test": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "Test2": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "c": Object {
+        "enum": Array [
+          1,
+          2,
+          3,
+        ],
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "c",
+    ],
+    "type": "object",
+  },
+}
+`;
+
 exports[`multipleSchemas 1`] = `
 Array [
   Object {
@@ -48,6 +86,17 @@ Array [
 ]
 `;
 
+exports[`saveExports 1`] = `
+Object {
+  "a": Object {
+    "foo": 1,
+  },
+  "b": Object {
+    "bar": 2,
+  },
+}
+`;
+
 exports[`singleSchema 1`] = `
 Object {
   "key": "Test",
@@ -55,6 +104,48 @@ Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
     "id": undefined,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "type": "ITest",
+}
+`;
+
+exports[`singleSchemaDefaultExport 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`singleSchemaJson 1`] = `
+Object {
+  "key": "Test",
+  "schema": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
     "properties": Object {
       "a": Object {
         "description": "a",

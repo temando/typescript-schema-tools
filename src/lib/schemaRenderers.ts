@@ -5,7 +5,7 @@ export const disclaimer = [
   '/* tslint:disable */',
 ].join('\n');
 
-export const renderSchemasToTs = (schemas: ITjsSchema[], { asDefaultExport = false } = {}) => {
+export function renderSchemasToTs (schemas: ITjsSchema[], { asDefaultExport = false } = {}) {
   if (asDefaultExport) { schemas = [schemas[0]]; }
 
   return [
@@ -19,12 +19,21 @@ export const renderSchemasToTs = (schemas: ITjsSchema[], { asDefaultExport = fal
     ),
     '',
   ].join('\n');
-};
+}
 
 export type IGetImportPath = (name: string) => string;
 
-export const renderExportsToTs = (names: string[], getImportPath: IGetImportPath) => {
-  const imports = names.map((name) => `import * as ${name} from '${getImportPath(name)}';`);
+export function renderExportsToTs (names: string[], {
+  getImportPath,
+  getImportPattern = (name) => `* as ${name}`,
+}: {
+  /** Used to produce the path in `import * as foo from 'getImportPath()'` */
+  getImportPath: IGetImportPath,
+
+  /** (Optional) Defaults to returning `* as ${name}` */
+  getImportPattern?: IGetImportPath,
+}) {
+  const imports = names.map((name) => `import ${getImportPattern(name)} from '${getImportPath(name)}';`);
 
   return [
     disclaimer,
@@ -35,8 +44,8 @@ export const renderExportsToTs = (names: string[], getImportPath: IGetImportPath
     `}`,
     '',
   ].join('\n');
-};
+}
 
-export const renderSchemasToJson = (schemas: ITjsSchema[]) => {
+export function renderSchemasToJson (schemas: ITjsSchema[]) {
   return JSON.stringify(schemas[0]);
-};
+}

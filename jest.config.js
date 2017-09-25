@@ -6,9 +6,9 @@ module.exports = {
   "moduleFileExtensions": [ "ts", "tsx", "js" ],
   "coverageDirectory": ".coverage",
   "coverageReporters": ['text', 'text-summary'],
-  // "coverageThreshold": {
-  //   "global": { statements: 76, lines: 80, functions: 72 }
-  // },
+  "coverageThreshold": {
+    "global": { statements: 76, lines: 80, functions: 72 }
+  },
   "testPathIgnorePatterns": [
     "/node_modules/",
     "build"
