@@ -23,10 +23,5 @@ describe('typeToSchema', () => {
 
     expect(errors).toBeFalsy();
     expect(schemas).toMatchSnapshot('multipleSchemas');
-
-    console.dir({
-      errors,
-      schemas,
-    }, { depth: 10, colors: true });
   });
 });

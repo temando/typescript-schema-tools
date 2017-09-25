@@ -20,7 +20,7 @@ export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
   /** The TS files to fetch types from */
   fromFiles: string[];
 
-  /** A hash of { [exportName]: tsType } */
+  /** A hash of { [exportName]: typeName } */
   types: { [key: string]: string };
 
   /** Optionally, set a default schema id */
@@ -60,12 +60,12 @@ export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
   return { errors: errors.length ? errors : undefined, schemas };
 }
 
-export async function saveSchema ({ schemas, directory, name, format, asDefaultExport }: {
+export async function saveSchema ({ schemas, directory, name, format, asDefaultExport = false }: {
   /** The file format to save as  */
   format: 'ts' | 'json';
 
   /**
-   * Whether to export as a default when `ts` format selected
+   * Whether to export as a default when `ts` format selected and `schemas` has a length of 1
    *
    * @default false
    */
@@ -80,6 +80,9 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
   schemas: any[];
 }) {
   if (!schemas.length) { return; }
+  if (asDefaultExport && schemas.length > 1) {
+    throw new Error(`You are trying to default export more than one schema`);
+  }
 
   await mkdirs(directory);
 
@@ -90,7 +93,7 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
   if (format === 'ts') { file = renderSchemasToTs(schemas, { asDefaultExport }); }
   if (format === 'json') { file = renderSchemasToJson(schemas); }
 
-  if (!file) { throw new Error(`Failure to render to format ${format}`); }
+  if (!file) { throw new Error(`Invalid render format: ${format}`); }
 
   await writeFile(filePath, file);
 }
