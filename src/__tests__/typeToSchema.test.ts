@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { typeToSchema } from '../';
+import { typeToSchema } from '..';
 
 describe('typeToSchema', () => {
   it('produces a single schema from one file', async () => {

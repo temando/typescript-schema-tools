@@ -2,7 +2,7 @@ import { dereference } from '@jdw/jst';
 import { mkdirs, writeFile } from 'fs-extra';
 import { join } from 'path';
 import * as TJS from 'typescript-json-schema';
-import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './typescript/schemaRenderers';
+import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
   key: string;
