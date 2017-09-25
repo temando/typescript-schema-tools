@@ -16,6 +16,10 @@ export const defaultOptions: Partial<TJS.Args> = {
   ignoreErrors: true, // Remove when we upgrade
 };
 
+/**
+ * Reads TypeScript files using `typescript-json-schema` and returns both
+ * errors and the resulting schemas.
+ */
 export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
   /** The TS files to fetch types from */
   fromFiles: string[];
@@ -63,6 +67,9 @@ export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
   };
 }
 
+/**
+ * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
+ */
 export async function saveSchema ({ schemas, directory, name, format, asDefaultExport = false }: {
   /** The file format to save as  */
   format: 'ts' | 'json';
@@ -102,7 +109,7 @@ export async function saveSchema ({ schemas, directory, name, format, asDefaultE
 }
 
 /**
- * Creates an index file wiring up imports
+ * Creates an index file wiring up imports and exports
  */
 export async function saveExports ({ exports, directory, name, getImportPath, getImportPattern }: {
   /** Names of export names */
