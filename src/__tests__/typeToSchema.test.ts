@@ -129,7 +129,7 @@ describe('typeToSchema', () => {
   });
 
   describe('saveExports()', () => {
-    afterAll(cleanTemp)
+    afterAll(cleanTemp);
 
     it('creates a file with imports and exports', async () => {
       const fileName = `exports`;
