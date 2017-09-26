@@ -1,6 +1,6 @@
 import { mkdir, remove } from 'fs-extra';
 import { join } from 'path';
-import { ITjsSchema, saveExports, saveSchema, typesToSchemas } from '..';
+import { ITjsSchema, saveExports, saveSchemas, typesToSchemas } from '..';
 
 /** Whether to delete created files, for testing */
 const DELETE_TEMP = true;
@@ -65,7 +65,7 @@ describe('typeToSchema', () => {
       const fileName = `singleSchema`;
       const fullFilePath = join(tempDirectory, `${fileName}.ts`);
 
-      await saveSchema({
+      await saveSchemas({
         asDefaultExport: true,
         directory: tempDirectory,
         name: fileName,
@@ -82,7 +82,7 @@ describe('typeToSchema', () => {
       const fileName = `singleSchemaJson`;
       const fullFilePath = join(tempDirectory, `${fileName}.json`);
 
-      await saveSchema({
+      await saveSchemas({
         asDefaultExport: true,
         directory: tempDirectory,
         name: fileName,
@@ -98,7 +98,7 @@ describe('typeToSchema', () => {
     it('correctly fails to save multiple schema as a default export', async () => {
       let error: Error | undefined;
 
-      await saveSchema({
+      await saveSchemas({
         asDefaultExport: true,
         directory: tempDirectory,
         name: 'thisShouldNotBeSaved',
@@ -113,7 +113,7 @@ describe('typeToSchema', () => {
       const fileName = `manySchemas`;
       const fullFilePath = join(tempDirectory, `${fileName}.ts`);
 
-      await saveSchema({
+      await saveSchemas({
         asDefaultExport: false,
         directory: tempDirectory,
         name: fileName,

@@ -70,7 +70,7 @@ export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
 /**
  * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
  */
-export async function saveSchema ({ schemas, directory, name, format, asDefaultExport = false }: {
+export async function saveSchemas ({ schemas, directory, name, format, asDefaultExport = false }: {
   /** The file format to save as  */
   format: 'ts' | 'json';
 
