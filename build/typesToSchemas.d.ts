@@ -28,7 +28,7 @@ export declare function typesToSchemas({fromFiles, types, id, options}: {
 /**
  * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
  */
-export declare function saveSchema({schemas, directory, name, format, asDefaultExport}: {
+export declare function saveSchemas({schemas, directory, name, format, asDefaultExport}: {
     /** The file format to save as  */
     format: 'ts' | 'json';
     /**
