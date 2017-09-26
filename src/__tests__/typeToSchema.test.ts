@@ -129,6 +129,8 @@ describe('typeToSchema', () => {
   });
 
   describe('saveExports()', () => {
+    afterAll(cleanTemp)
+
     it('creates a file with imports and exports', async () => {
       const fileName = `exports`;
       const fullFilePath = join(tempDirectory, fileName);
