@@ -1,1 +1,1 @@
-export * from './typeToSchema';
+export * from './typesToSchemas';
