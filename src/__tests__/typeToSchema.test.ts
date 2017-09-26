@@ -10,7 +10,10 @@ describe('typeToSchema', () => {
   const tempDirectory = join(__dirname, './__temp__');
 
   async function ensureTemp () { try { await mkdir(tempDirectory); } catch { /**/ } }
-  async function cleanTemp () { if (DELETE_TEMP) { await remove(tempDirectory); } }
+  async function removeTemp () { if (DELETE_TEMP) { await remove(tempDirectory); } }
+
+  beforeAll(ensureTemp);
+  afterAll(removeTemp);
 
   describe('typeToSchema()', () => {
     it('produces a single schema from one file', async () => {
@@ -42,8 +45,6 @@ describe('typeToSchema', () => {
     let manySchemas: ITjsSchema[];
 
     beforeAll(async () => {
-      await ensureTemp();
-
       const { schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
         types: { Test: 'ITest' },
@@ -59,8 +60,6 @@ describe('typeToSchema', () => {
       manySchemas = schemas;
 
     });
-
-    afterAll(cleanTemp);
 
     it('saves a single schema as default export to a .ts file', async () => {
       const fileName = `singleSchema`;
@@ -129,8 +128,6 @@ describe('typeToSchema', () => {
   });
 
   describe('saveExports()', () => {
-    afterAll(cleanTemp);
-
     it('creates a file with imports and exports', async () => {
       const fileName = `exports`;
       const fullFilePath = join(tempDirectory, fileName);
