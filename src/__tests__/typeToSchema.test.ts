@@ -1,6 +1,6 @@
 import { mkdir, remove } from 'fs-extra';
 import { join } from 'path';
-import { ITjsSchema, saveExports, saveSchema, typeToSchema } from '..';
+import { ITjsSchema, saveExports, saveSchema, typesToSchemas } from '..';
 
 /** Whether to delete created files, for testing */
 const DELETE_TEMP = true;
@@ -14,7 +14,7 @@ describe('typeToSchema', () => {
 
   describe('typeToSchema()', () => {
     it('produces a single schema from one file', async () => {
-      const { errors, schemas: [schema] } = await typeToSchema({
+      const { errors, schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
         types: { Test: 'ITest' },
       });
@@ -24,7 +24,7 @@ describe('typeToSchema', () => {
     });
 
     it('produces multiple schemas from one file', async () => {
-      const { errors, schemas } = await typeToSchema({
+      const { errors, schemas } = await typesToSchemas({
         fromFiles: [join(__dirname, './fixtures/types.ts')],
         types: {
           Test: 'ITest',
@@ -44,14 +44,14 @@ describe('typeToSchema', () => {
     beforeAll(async () => {
       await ensureTemp();
 
-      const { schemas: [schema] } = await typeToSchema({
+      const { schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
         types: { Test: 'ITest' },
       });
 
       singleSchema = schema;
 
-      const { schemas } = await typeToSchema({
+      const { schemas } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
         types: { Test: 'ITest', Test2: 'ITest2' },
       });

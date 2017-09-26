@@ -20,7 +20,7 @@ export const defaultOptions: Partial<TJS.Args> = {
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.
  */
-export async function typeToSchema ({ fromFiles, types, id, options = {} }: {
+export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
   /** The TS files to fetch types from */
   fromFiles: string[];
 
