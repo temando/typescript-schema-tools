@@ -8,7 +8,7 @@ mkdir build
 rsync -am . ./build  --exclude '*/*' --include '*'
 
 # Copy latent files from source, recursively
-rsync -am  ./src/* ./build --exclude '*.ts'
+rsync -am  ./src/* ./build --exclude '*.ts' --exclude '*.snap'
 
 # Build typescript
 yarn tsc
