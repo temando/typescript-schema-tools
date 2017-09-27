@@ -41,7 +41,7 @@ Object {
 exports[`multipleSchemas 1`] = `
 Array [
   Object {
-    "key": "Test",
+    "name": "Test",
     "schema": Object {
       "$schema": "http://json-schema.org/draft-04/schema#",
       "additionalProperties": false,
@@ -61,7 +61,7 @@ Array [
     "type": "ITest",
   },
   Object {
-    "key": "Test2",
+    "name": "Test2",
     "schema": Object {
       "$schema": "http://json-schema.org/draft-04/schema#",
       "additionalProperties": false,
@@ -99,7 +99,7 @@ Object {
 
 exports[`singleSchema 1`] = `
 Object {
-  "key": "Test",
+  "name": "Test",
   "schema": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
@@ -142,7 +142,7 @@ Object {
 
 exports[`singleSchemaJson 1`] = `
 Object {
-  "key": "Test",
+  "name": "Test",
   "schema": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,

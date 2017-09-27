@@ -1,9 +1,14 @@
 import { map } from 'bluebird';
 import { clone, merge } from 'lutils';
 import {
-  IBuilderSchemaConfig, ISaveSchemasConfig, ITjsSchema,
+  ISaveSchemasConfig, ITjsSchema,
   ITypesToSchemasConfig, saveSchemas, typesToSchemas,
 } from './typesToSchemas';
+
+export interface IBuilderSchemaConfig {
+  save?: Partial<ISaveSchemasConfig>;
+  compile?: Partial<ITypesToSchemasConfig>;
+}
 
 export class TypeSchemaBuilder {
   private saveConfig?: ISaveSchemasConfig;

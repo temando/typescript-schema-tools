@@ -147,8 +147,3 @@ export async function saveExports ({ exports, directory, name, getImportPath, ge
 
   await writeFile(filePath, file);
 }
-
-export interface IBuilderSchemaConfig {
-  save?: Partial<ISaveSchemasConfig>;
-  compile?: Partial<ITypesToSchemasConfig>;
-}

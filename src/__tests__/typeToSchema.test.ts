@@ -19,7 +19,9 @@ describe('typeToSchema', () => {
     it('produces a single schema from one file', async () => {
       const { errors, schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
-        types: { Test: 'ITest' },
+        types: [
+          { name: 'Test', type: 'ITest' },
+        ],
       });
 
       expect(errors).toBeFalsy();
@@ -29,10 +31,10 @@ describe('typeToSchema', () => {
     it('produces multiple schemas from one file', async () => {
       const { errors, schemas } = await typesToSchemas({
         fromFiles: [join(__dirname, './fixtures/types.ts')],
-        types: {
-          Test: 'ITest',
-          Test2: 'ITest2',
-        },
+        types: [
+          { name: 'Test', type: 'ITest' },
+          { name: 'Test2', type: 'ITest2' },
+        ],
       });
 
       expect(errors).toBeFalsy();
@@ -47,14 +49,17 @@ describe('typeToSchema', () => {
     beforeAll(async () => {
       const { schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
-        types: { Test: 'ITest' },
+        types: [{ name: 'Test', type: 'ITest' }],
       });
 
       singleSchema = schema;
 
       const { schemas } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
-        types: { Test: 'ITest', Test2: 'ITest2' },
+        types: [
+          { name: 'Test', type: 'ITest' },
+          { name: 'Test2', type: 'ITest2' },
+        ],
       });
 
       manySchemas = schemas;
