@@ -5,7 +5,7 @@ import * as TJS from 'typescript-json-schema';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
-  key: string;
+  name: string;
   type: string;
   schema: any;
 }
@@ -16,23 +16,34 @@ export const defaultOptions: Partial<TJS.Args> = {
   ignoreErrors: true, // Remove when we upgrade
 };
 
-/**
- * Reads TypeScript files using `typescript-json-schema` and returns both
- * errors and the resulting schemas.
- */
-export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
+export interface ITypesToSchemasConfig {
   /** The TS files to fetch types from */
   fromFiles: string[];
 
   /** A hash of { [exportName]: typeName } */
-  types: { [key: string]: string };
+  types: Array<{
+    name: string;
+    type: string;
 
-  /** Optionally, set a default schema id */
-  id?: string;
+    /** Optionally, set a default schema id */
+    id?: string;
+  }>;
 
   /** TJS options to override */
-  options?: Partial<TJS.Args>,
-}): Promise<{
+  options?: Partial<TJS.Args>;
+
+  dereference?: boolean;
+}
+
+/**
+ * Reads TypeScript files using `typescript-json-schema` and returns both
+ * errors and the resulting schemas.
+ */
+export async function typesToSchemas ({
+  fromFiles, types,
+  options = {},
+  dereference: doDereference = true,
+}: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
 }> {
@@ -41,9 +52,7 @@ export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
   const schemas: ITjsSchema[] = [];
   const errors: Error[] = [];
 
-  Object.keys(types).forEach((key) => {
-    const type = types[key];
-
+  types.forEach(({ name, type, id }) => {
     let schema: any;
 
     try {
@@ -57,7 +66,10 @@ export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
 
     if (schema) {
       schema.id = schema.id || id;
-      schemas.push({ key, type, schema: dereference(schema, undefined as any) });
+
+      if (doDereference) { schema = dereference(schema, undefined as any); }
+
+      schemas.push({ name, type, schema });
     }
   });
 
@@ -67,10 +79,7 @@ export async function typesToSchemas ({ fromFiles, types, id, options = {} }: {
   };
 }
 
-/**
- * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
- */
-export async function saveSchemas ({ schemas, directory, name, format, asDefaultExport = false }: {
+export interface ISaveSchemasConfig {
   /** The file format to save as  */
   format: 'ts' | 'json';
 
@@ -88,7 +97,12 @@ export async function saveSchemas ({ schemas, directory, name, format, asDefault
   directory: string;
 
   schemas: ITjsSchema[];
-}) {
+}
+
+/**
+ * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
+ */
+export async function saveSchemas ({ schemas, directory, name, format, asDefaultExport = false }: ISaveSchemasConfig) {
   if (!schemas.length) { return; }
   if (asDefaultExport && schemas.length > 1) {
     throw new Error(`You are trying to default export more than one schema`);
@@ -132,4 +146,9 @@ export async function saveExports ({ exports, directory, name, getImportPath, ge
   const filePath = join(directory, `${name}.ts`);
 
   await writeFile(filePath, file);
+}
+
+export interface IBuilderSchemaConfig {
+  save?: Partial<ISaveSchemasConfig>;
+  compile?: Partial<ITypesToSchemasConfig>;
 }

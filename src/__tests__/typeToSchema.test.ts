@@ -15,7 +15,7 @@ describe('typeToSchema', () => {
   beforeAll(ensureTemp);
   afterAll(removeTemp);
 
-  describe('typeToSchema()', () => {
+  describe('typesToSchemas()', () => {
     it('produces a single schema from one file', async () => {
       const { errors, schemas: [schema] } = await typesToSchemas({
         fromFiles: [typeFixturesFilePath],
@@ -40,7 +40,7 @@ describe('typeToSchema', () => {
     });
   });
 
-  describe('saveSchema()', () => {
+  describe('saveSchemas()', () => {
     let singleSchema: ITjsSchema;
     let manySchemas: ITjsSchema[];
 

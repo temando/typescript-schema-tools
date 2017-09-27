@@ -10,11 +10,11 @@ export function renderSchemasToTs (schemas: ITjsSchema[], { asDefaultExport = fa
 
   return [
     disclaimer,
-    ...schemas.map(({ key, type, schema }) =>
+    ...schemas.map(({ name, type, schema }) =>
       [
         ``,
         `/** @type ${type} */`,
-        `export ${asDefaultExport ? 'default' : `const ${key} =`} ${JSON.stringify(schema, null, 2)};`,
+        `export ${asDefaultExport ? 'default' : `const ${name} =`} ${JSON.stringify(schema, null, 2)};`,
       ].join('\n'),
     ),
     '',
