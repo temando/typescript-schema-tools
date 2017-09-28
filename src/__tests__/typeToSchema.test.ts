@@ -1,6 +1,7 @@
 import { mkdir, remove } from 'fs-extra';
 import { join } from 'path';
 import { ITjsSchema, saveExports, saveSchemas, typesToSchemas } from '..';
+import { TypeSchemaBuilder } from '../TypeSchemaBuilder';
 
 /** Whether to delete created files, for testing */
 const DELETE_TEMP = true;
@@ -151,4 +152,90 @@ describe('typeToSchema', () => {
     });
   });
 
+  describe('TypeSchemaBuilder', () => {
+    it('compiles and saves multiple seperate schemas', async () => {
+      const fileOne = 'builderOne';
+      const fileTwo = 'builderTwo';
+
+      // Verbose chaining method
+      const builder = new TypeSchemaBuilder({
+        compile: {
+          fromFiles: [typeFixturesFilePath],
+        },
+        save: {
+          asDefaultExport: true,
+          directory: tempDirectory,
+          format: 'ts',
+        },
+      })
+        .add({
+          compile: {
+            types: [{ name: 'Test', type: 'ITest' }],
+          },
+          save: { name: fileOne },
+        })
+        .add({
+          compile: {
+            types: [{ name: 'Test2', type: 'ITest2' }],
+          },
+          save: { name: fileTwo },
+        });
+
+      await builder.compile();
+      await builder.save();
+
+      expect(
+        require(join(tempDirectory, fileOne)),
+      ).toMatchSnapshot('builderSeperateOne');
+
+      expect(
+        require(join(tempDirectory, fileTwo)),
+      ).toMatchSnapshot('builderSeperateTwo');
+    });
+
+    it('compiles and saves multiple combined schemas', async () => {
+      const fileOne = 'builderTogetherOne';
+      const fileTwo = 'builderTogetherTwo';
+
+      const types = [
+        { name: fileOne, type: 'ITest' },
+        { name: fileTwo, type: 'ITest2' },
+      ];
+
+      // Simplified chaining
+      await new TypeSchemaBuilder({
+        compile: {
+          fromFiles: [typeFixturesFilePath],
+        },
+        save: {
+          asDefaultExport: false, // this causes multiple to be included in one file
+          directory: tempDirectory,
+          format: 'ts',
+        },
+      })
+        .add({
+          compile: { types },
+          save: { name: fileOne },
+        })
+        .add({
+          compile: { types },
+          save: { name: fileTwo },
+        })
+        .compileAndSave();
+
+      const exportsOne = require(join(tempDirectory, fileOne));
+
+      expect(exportsOne).toMatchObject({
+        [fileOne]: {},
+        [fileTwo]: {},
+      });
+
+      expect(exportsOne).toMatchSnapshot(fileOne);
+
+      expect(
+        require(join(tempDirectory, fileTwo)),
+      ).toMatchSnapshot(fileTwo);
+
+    });
+  });
 });

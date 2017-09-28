@@ -11,8 +11,8 @@ export interface IBuilderSchemaConfig {
 }
 
 export class TypeSchemaBuilder {
-  private saveConfig?: ISaveSchemasConfig;
-  private compileConfig?: ITypesToSchemasConfig;
+  private saveConfig?: Partial<ISaveSchemasConfig>;
+  private compileConfig?: Partial<ITypesToSchemasConfig>;
 
   private builderConfigs: IBuilderSchemaConfig[] = [];
   private compileResults: Array<{
@@ -22,20 +22,20 @@ export class TypeSchemaBuilder {
   }> = [];
 
   constructor ({ save, compile }: {
-    save?: ISaveSchemasConfig,
-    compile?: ITypesToSchemasConfig,
+    save?: TypeSchemaBuilder['saveConfig'],
+    compile?: TypeSchemaBuilder['compileConfig'],
   }) {
     this.saveConfig = save;
     this.compileConfig = compile;
   }
 
-  add (schemaConfig: IBuilderSchemaConfig) {
+  public add (schemaConfig: IBuilderSchemaConfig) {
     this.builderConfigs.push(schemaConfig);
 
     return this;
   }
 
-  async compile () {
+  public async compile () {
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
         clone(this.compileConfig || {}),
@@ -50,9 +50,11 @@ export class TypeSchemaBuilder {
         config,
       });
     });
+
+    return this;
   }
 
-  async save () {
+  public async save () {
     await map(this.compileResults, async ({ config, schemas: schemaConfigs, errors }) => {
       if (errors) { return; }
 
@@ -68,8 +70,6 @@ export class TypeSchemaBuilder {
 
       if (method === 'seperate') {
         return map(schemaConfigs, (schemaConfig) => {
-          const { name, schema } = schemaConfig;
-
           return saveSchemas({
             ...mergedConfig,
             schemas: [schemaConfig],
@@ -82,5 +82,14 @@ export class TypeSchemaBuilder {
         });
       }
     });
+
+    return this;
+  }
+
+  public async compileAndSave () {
+    await this.compile();
+    await this.save();
+
+    return this;
   }
 }

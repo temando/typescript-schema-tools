@@ -1,5 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`builderSeperateOne 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`builderSeperateTwo 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "c": Object {
+        "enum": Array [
+          1,
+          2,
+          3,
+        ],
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "c",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`builderTogetherOne 1`] = `
+Object {
+  "builderTogetherOne": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "builderTogetherTwo": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "c": Object {
+        "enum": Array [
+          1,
+          2,
+          3,
+        ],
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "c",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`builderTogetherTwo 1`] = `
+Object {
+  "builderTogetherOne": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "builderTogetherTwo": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "c": Object {
+        "enum": Array [
+          1,
+          2,
+          3,
+        ],
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "c",
+    ],
+    "type": "object",
+  },
+}
+`;
+
 exports[`manySchemas 1`] = `
 Object {
   "Test": Object {
