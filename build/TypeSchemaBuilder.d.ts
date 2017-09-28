@@ -13,8 +13,8 @@ export declare class TypeSchemaBuilder {
     private compileConfig?;
     private builderConfigs;
     constructor({save, compile}: {
-        save?: TypeSchemaBuilder['saveConfig'];
-        compile?: TypeSchemaBuilder['compileConfig'];
+        save?: Partial<ISaveSchemasConfig>;
+        compile?: Partial<ITypesToSchemasConfig>;
     });
     add(schemaConfig: IBuilderSchemaConfig): this;
     compile(): Promise<{
