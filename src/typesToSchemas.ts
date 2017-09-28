@@ -45,7 +45,7 @@ export interface ITypesToSchemasConfig {
 export async function typesToSchemas ({
   fromFiles, types,
   options = {},
-  dereference: doDereference = true,
+  dereference: doDereference = false,
 }: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
