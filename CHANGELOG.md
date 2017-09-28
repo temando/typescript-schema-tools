@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Various changes
+
 ## [1.1.0][] - 2017-09-26
 
 ## [1.0.0][] - 2017-09-26
