@@ -22,10 +22,13 @@ export interface ITypesToSchemasConfig {
 
   /** A hash of { [exportName]: typeName } */
   types: Array<{
-    name: string;
+    /** Required when `asDefaultExport` is `false` */
+    name?: string;
+
+    /** The typescript type to generate from */
     type: string;
 
-    /** Optionally, set a default schema id */
+    /** Can be used to set `schema.id` if it is not set */
     id?: string;
   }>;
 
@@ -90,7 +93,9 @@ export interface ISaveSchemasConfig {
    */
   asDefaultExport: boolean;
 
-  /** The name of the saved file, without extension */
+  /**
+   * The name of the saved file, without extension.
+   */
   name: string;
 
   /** The absolute path to the save directory */
