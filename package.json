@@ -19,7 +19,7 @@
     "build": "bash -v -e scripts/build",
     "build:link": "yarn build && cd build && yarn link",
     "preversion": "yarn lint && yarn build && yarn test && changelog-verify CHANGELOG.md",
-    "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md",
+    "version": "version-changelog CHANGELOG.md && git add CHANGELOG.md",
     "postversion": "yarn build"
   },
   "devDependencies": {
