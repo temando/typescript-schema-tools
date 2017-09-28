@@ -5,7 +5,7 @@ import * as TJS from 'typescript-json-schema';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
-  name: string;
+  name?: string;
   type: string;
   schema: any;
 }
