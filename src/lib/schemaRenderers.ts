@@ -11,7 +11,7 @@ export function renderSchemasToTs (schemas: ITjsSchema[], { asDefaultExport = fa
   return [
     disclaimer,
     ...schemas.map(({ name, type, schema }) => {
-      if (!asDefaultExport && name == null) {
+      if (!asDefaultExport && !name) {
         throw new Error(`Failure rendering type ${type}. 'name' is required when 'asDefaultExport' is false`);
       }
 
