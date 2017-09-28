@@ -170,13 +170,13 @@ describe('typeToSchema', () => {
       })
         .add({
           compile: {
-            types: [{ name: 'Test', type: 'ITest' }],
+            types: [{ type: 'ITest' }],
           },
           save: { name: fileOne },
         })
         .add({
           compile: {
-            types: [{ name: 'Test2', type: 'ITest2' }],
+            types: [{ type: 'ITest2' }],
           },
           save: { name: fileTwo },
         });
