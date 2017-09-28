@@ -19,12 +19,11 @@ export class TypeSchemaBuilder {
 
   private saveConfig?: Partial<ISaveSchemasConfig>;
   private compileConfig?: Partial<ITypesToSchemasConfig>;
-
   private builderConfigs: IBuilderSchemaConfig[] = [];
 
   constructor ({ save, compile }: {
-    save?: TypeSchemaBuilder['saveConfig'],
-    compile?: TypeSchemaBuilder['compileConfig'],
+    save?: Partial<ISaveSchemasConfig>,
+    compile?: Partial<ITypesToSchemasConfig>,
   }) {
     this.saveConfig = save;
     this.compileConfig = compile;
