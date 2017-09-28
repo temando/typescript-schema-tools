@@ -26,13 +26,12 @@ lint:
 units:
   stage: test
   script:
-    - yarn test:build
     - yarn coverage
 
 publish:
   stage: publish
   script:
-    - yarn release
+    - npm run release
   only:
     - tags@service-library/schema-tools
 
