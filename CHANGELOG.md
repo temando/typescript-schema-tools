@@ -9,6 +9,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [1.1.0][] - 2017-09-26
 
+- Misc changes
+
 ## [1.0.0][] - 2017-09-26
 
 ### Changed
