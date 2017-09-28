@@ -21,7 +21,7 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: undefined/compare/v2.0.0...HEAD
-[2.0.0]: undefined/compare/v1.1.0...v2.0.0
-[1.1.0]: undefined/compare/v1.0.0...v1.1.0
-[1.0.0]: undefined/tree/v1.0.0
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.0.0...HEAD
+[2.0.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v1.1.0...v2.0.0
+[1.1.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v1.0.0...v1.1.0
+[1.0.0]: https://src.temando.io/sam.johnson/schema-tools/tree/v1.0.0
