@@ -1,7 +1,7 @@
 import * as TJS from 'typescript-json-schema';
 import { IGetImportPath } from './lib/schemaRenderers';
 export interface ITjsSchema {
-    name: string;
+    name?: string;
     type: string;
     schema: any;
 }
@@ -11,9 +11,11 @@ export interface ITypesToSchemasConfig {
     fromFiles: string[];
     /** A hash of { [exportName]: typeName } */
     types: Array<{
-        name: string;
+        /** Required when `asDefaultExport` is `false` */
+        name?: string;
+        /** The typescript type to generate from */
         type: string;
-        /** Optionally, set a default schema id */
+        /** Can be used to set `schema.id` if it is not set */
         id?: string;
     }>;
     /** TJS options to override */
@@ -37,7 +39,9 @@ export interface ISaveSchemasConfig {
      * @default false
      */
     asDefaultExport: boolean;
-    /** The name of the saved file, without extension */
+    /**
+     * The name of the saved file, without extension.
+     */
     name: string;
     /** The absolute path to the save directory */
     directory: string;

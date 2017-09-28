@@ -4,6 +4,11 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.1.0][] - 2017-09-28
+
+- Fixes to interfaces conserning compile `types` input
+- Readme updates
+
 ## [2.0.0][] - 2017-09-28
 
 - Modified typeToSchema interface
@@ -21,7 +26,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.0.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.1.0...HEAD
+[2.1.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.0.0...v2.1.0
 [2.0.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v1.1.0...v2.0.0
 [1.1.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v1.0.0...v1.1.0
 [1.0.0]: https://src.temando.io/sam.johnson/schema-tools/tree/v1.0.0
