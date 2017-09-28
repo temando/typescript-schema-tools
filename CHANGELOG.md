@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.0.0][] - 2017-09-28
+
 - Modified typeToSchema interface
 - Added TypeSchemaBuilder
 
@@ -19,6 +21,7 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: undefined/compare/v1.1.0...HEAD
+[Unreleased]: undefined/compare/v2.0.0...HEAD
+[2.0.0]: undefined/compare/v1.1.0...v2.0.0
 [1.1.0]: undefined/compare/v1.0.0...v1.1.0
 [1.0.0]: undefined/tree/v1.0.0
