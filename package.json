@@ -23,6 +23,9 @@
     "postversion": "yarn build"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.12",
+    "@types/fs-extra": "^4.0.2",
+    "@types/jest": "^20.0.8",
     "@types/node": "^8.0.28",
     "changelog-verify": "^1.0.4",
     "jest": "^21.1.0",
@@ -34,11 +37,10 @@
     "version-changelog": "^2.1.0"
   },
   "dependencies": {
-    "typescript-json-schema": "^0.16.0",
     "@jdw/jst": "^2.0.0-beta.12",
-    "@types/fs-extra": "^4.0.2",
-    "@types/jest": "^20.0.8",
     "bluebird": "^3.5.0",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^4.0.2",
+    "lutils": "^2.4.0",
+    "typescript-json-schema": "^0.16.0"
   }
 }
