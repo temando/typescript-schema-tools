@@ -11,15 +11,16 @@ export interface IBuilderSchemaConfig {
 }
 
 export class TypeSchemaBuilder {
-  private saveConfig?: Partial<ISaveSchemasConfig>;
-  private compileConfig?: Partial<ITypesToSchemasConfig>;
-
-  private builderConfigs: IBuilderSchemaConfig[] = [];
-  private compileResults: Array<{
+  public compiled: Array<{
     schemas: ITjsSchema[],
     config: IBuilderSchemaConfig,
     errors?: Error[],
   }> = [];
+
+  private saveConfig?: Partial<ISaveSchemasConfig>;
+  private compileConfig?: Partial<ITypesToSchemasConfig>;
+
+  private builderConfigs: IBuilderSchemaConfig[] = [];
 
   constructor ({ save, compile }: {
     save?: TypeSchemaBuilder['saveConfig'],
@@ -44,18 +45,18 @@ export class TypeSchemaBuilder {
 
       const { errors, schemas } = await typesToSchemas(mergedConfig);
 
-      this.compileResults.push({
+      this.compiled.push({
         schemas,
         errors,
         config,
       });
     });
 
-    return this;
+    return this.compiled;
   }
 
-  public async save () {
-    await map(this.compileResults, async ({ config, schemas: schemaConfigs, errors }) => {
+  public async save (compiled = this.compiled) {
+    await map(compiled, async ({ config, schemas: schemaConfigs, errors }) => {
       if (errors) { return; }
 
       const mergedConfig = <ISaveSchemasConfig> merge(
@@ -82,8 +83,6 @@ export class TypeSchemaBuilder {
         });
       }
     });
-
-    return this;
   }
 
   public async compileAndSave () {
