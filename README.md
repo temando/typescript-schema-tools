@@ -38,7 +38,7 @@ import { TypeSchemaBuilder } from '@temando/schema-tools';
       save: { name: 'MyFancySchema2' },
     })
     .compileAndSave();
-})()
+})();
 ```
 
 The above will have produced these files:
@@ -75,14 +75,14 @@ import { TypeSchemaBuilder } from '@temando/schema-tools';
     .add({
       compile: {
         types: [
-          { name: 'myTest1', type: 'ITest' }
-          { name: 'myTest4', type: 'ITest4' }
+          { name: 'myTest1', type: 'ITest' },
+          { name: 'myTest4', type: 'ITest4' },
         ],
       },
       save: { name: 'schemaFile1' },
     })
     .compileAndSave();
-})()
+})();
 ```
 
 The above will produce one file like so:
