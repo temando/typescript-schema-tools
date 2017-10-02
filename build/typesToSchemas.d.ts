@@ -1,15 +1,17 @@
 import { Args } from 'typescript-json-schema';
-import { Program } from 'typescript-json-schema/node_modules/typescript';
 import { IGetImportPath } from './lib/schemaRenderers';
 export interface ITjsSchema {
     name?: string;
     type: string;
     schema: any;
 }
+export interface IProgram {
+    [key: string]: any;
+}
 export declare const defaultOptions: Partial<Args>;
 export interface ITypesToSchemasConfig {
     /** The TS files to fetch types from, or an existing ts.Program */
-    fromFiles: string[] | Program;
+    fromFiles: string[] | IProgram;
     /** A hash of { [exportName]: typeName } */
     types: Array<{
         /** Required when `asDefaultExport` is `false` */
@@ -23,7 +25,7 @@ export interface ITypesToSchemasConfig {
     options?: Partial<Args>;
     dereference?: boolean;
 }
-export declare function getTsProgram(fromFiles: string[] | Program): Program;
+export declare function getTsProgram(fromFiles: string[] | IProgram): IProgram;
 /**
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.

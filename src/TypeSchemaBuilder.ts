@@ -11,6 +11,11 @@ export interface IBuilderSchemaConfig {
   compile?: Partial<ITypesToSchemasConfig>;
 }
 
+export interface IAddTypeConfig {
+  type: string;
+  name?: string;
+}
+
 export class TypeSchemaBuilder {
   public compiled: Array<{
     schemas: ITjsSchema[],
@@ -37,10 +42,27 @@ export class TypeSchemaBuilder {
     }
   }
 
-  public add (schemaConfig: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
-    if (!isArray(schemaConfig)) { schemaConfig = [schemaConfig]; }
+  /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
+  public add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
+    if (!isArray(configs)) { configs = [configs]; }
 
-    this.builderConfigs.push(...schemaConfig);
+    this.builderConfigs.push(...configs);
+
+    return this;
+  }
+
+  /** A simplified method, like #add(), to map a type to a name */
+  public addType (configs: IAddTypeConfig|IAddTypeConfig[]) {
+    if (!isArray(configs)) { configs = [configs]; }
+
+    this.add(
+      configs.map(({ type, name = type }) => {
+        return {
+          compile: { types: [{ type,name }] },
+          save: { name },
+        };
+      }),
+    );
 
     return this;
   }

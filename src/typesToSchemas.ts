@@ -3,7 +3,6 @@ import { mkdirs, writeFile } from 'fs-extra';
 import { isArray } from 'lutils';
 import { join } from 'path';
 import { Args, generateSchema, getProgramFromFiles } from 'typescript-json-schema';
-import { Program } from 'typescript-json-schema/node_modules/typescript';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
@@ -11,6 +10,8 @@ export interface ITjsSchema {
   type: string;
   schema: any;
 }
+
+export interface IProgram { [key: string]: any; }
 
 export const defaultOptions: Partial<Args> = {
   required: true,
@@ -20,7 +21,7 @@ export const defaultOptions: Partial<Args> = {
 
 export interface ITypesToSchemasConfig {
   /** The TS files to fetch types from, or an existing ts.Program */
-  fromFiles: string[] | Program;
+  fromFiles: string[] | IProgram;
 
   /** A hash of { [exportName]: typeName } */
   types: Array<{
@@ -41,7 +42,7 @@ export interface ITypesToSchemasConfig {
 
 }
 
-export function getTsProgram (fromFiles: string[]|Program): Program {
+export function getTsProgram (fromFiles: string[]|IProgram): IProgram {
   const program = isArray(fromFiles)
     ? getProgramFromFiles(fromFiles as any)
     : fromFiles;
@@ -70,7 +71,7 @@ export async function typesToSchemas ({
     let schema: any;
 
     try {
-      schema = generateSchema(program, type, {
+      schema = generateSchema(program as any, type, {
         ...defaultOptions,
         ...options,
       });

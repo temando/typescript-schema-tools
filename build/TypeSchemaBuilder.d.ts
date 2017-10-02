@@ -3,6 +3,10 @@ export interface IBuilderSchemaConfig {
     save?: Partial<ISaveSchemasConfig>;
     compile?: Partial<ITypesToSchemasConfig>;
 }
+export interface IAddTypeConfig {
+    type: string;
+    name?: string;
+}
 export declare class TypeSchemaBuilder {
     compiled: Array<{
         schemas: ITjsSchema[];
@@ -17,7 +21,10 @@ export declare class TypeSchemaBuilder {
         compile?: Partial<ITypesToSchemasConfig>;
         reuseProgram?: boolean;
     });
-    add(schemaConfig: IBuilderSchemaConfig): this;
+    /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
+    add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
+    /** A simplified method, like #add(), to map a type to a name */
+    addType(configs: IAddTypeConfig | IAddTypeConfig[]): this;
     compile(): Promise<{
         schemas: ITjsSchema[];
         config: IBuilderSchemaConfig;
