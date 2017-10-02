@@ -1,7 +1,8 @@
 import { dereference } from '@jdw/jst';
 import { mkdirs, writeFile } from 'fs-extra';
+import { isArray } from 'lutils';
 import { join } from 'path';
-import * as TJS from 'typescript-json-schema';
+import { Args, generateSchema, getProgramFromFiles } from 'typescript-json-schema';
 import { Program } from 'typescript-json-schema/node_modules/typescript';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
@@ -11,15 +12,15 @@ export interface ITjsSchema {
   schema: any;
 }
 
-export const defaultOptions: Partial<TJS.Args> = {
+export const defaultOptions: Partial<Args> = {
   required: true,
   noExtraProps: true,
   ignoreErrors: true, // Remove when we upgrade
 };
 
 export interface ITypesToSchemasConfig {
-  /** The TS files to fetch types from */
-  fromFiles: string[];
+  /** The TS files to fetch types from, or an existing ts.Program */
+  fromFiles: string[] | Program;
 
   /** A hash of { [exportName]: typeName } */
   types: Array<{
@@ -34,11 +35,18 @@ export interface ITypesToSchemasConfig {
   }>;
 
   /** TJS options to override */
-  options?: Partial<TJS.Args>;
+  options?: Partial<Args>;
 
   dereference?: boolean;
 
-  program?: Program;
+}
+
+export function getTsProgram (fromFiles: string[]|Program): Program {
+  const program = isArray(fromFiles)
+    ? getProgramFromFiles(fromFiles as any)
+    : fromFiles;
+
+  return program;
 }
 
 /**
@@ -49,11 +57,12 @@ export async function typesToSchemas ({
   fromFiles, types,
   options = {},
   dereference: doDereference = false,
-  program = TJS.getProgramFromFiles(fromFiles),
 }: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
 }> {
+  const program = getTsProgram(fromFiles);
+
   const schemas: ITjsSchema[] = [];
   const errors: Error[] = [];
 
@@ -61,7 +70,7 @@ export async function typesToSchemas ({
     let schema: any;
 
     try {
-      schema = TJS.generateSchema(program, type, {
+      schema = generateSchema(program, type, {
         ...defaultOptions,
         ...options,
       });

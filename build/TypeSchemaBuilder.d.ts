@@ -12,9 +12,10 @@ export declare class TypeSchemaBuilder {
     private saveConfig?;
     private compileConfig?;
     private builderConfigs;
-    constructor({save, compile}: {
+    constructor({save, compile, reuseProgram}: {
         save?: Partial<ISaveSchemasConfig>;
         compile?: Partial<ITypesToSchemasConfig>;
+        reuseProgram?: boolean;
     });
     add(schemaConfig: IBuilderSchemaConfig): this;
     compile(): Promise<{

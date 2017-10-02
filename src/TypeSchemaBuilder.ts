@@ -1,7 +1,6 @@
 import { map } from 'bluebird';
-import { clone, merge } from 'lutils';
-import { getProgramFromFiles } from 'typescript-json-schema';
-import { Program } from 'typescript-json-schema/node_modules/typescript';
+import { clone, isArray, merge } from 'lutils';
+import { getTsProgram } from './';
 import {
   ISaveSchemasConfig, ITjsSchema,
   ITypesToSchemasConfig, saveSchemas, typesToSchemas,
@@ -19,8 +18,6 @@ export class TypeSchemaBuilder {
     errors?: Error[],
   }> = [];
 
-  private program?: Program;
-
   private saveConfig?: Partial<ISaveSchemasConfig>;
   private compileConfig?: Partial<ITypesToSchemasConfig>;
   private builderConfigs: IBuilderSchemaConfig[] = [];
@@ -33,13 +30,17 @@ export class TypeSchemaBuilder {
     this.saveConfig = save;
     this.compileConfig = compile;
 
-    if (reuseProgram && compile.fromFiles) {
-      this.program = getProgramFromFiles(compile.fromFiles);
+    const { fromFiles } = this.compileConfig;
+
+    if (reuseProgram && fromFiles) {
+      this.compileConfig.fromFiles = getTsProgram(fromFiles);
     }
   }
 
-  public add (schemaConfig: IBuilderSchemaConfig) {
-    this.builderConfigs.push(schemaConfig);
+  public add (schemaConfig: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
+    if (!isArray(schemaConfig)) { schemaConfig = [schemaConfig]; }
+
+    this.builderConfigs.push(...schemaConfig);
 
     return this;
   }
@@ -47,7 +48,6 @@ export class TypeSchemaBuilder {
   public async compile () {
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
-        { program: this.program },
         clone(this.compileConfig || {}),
         config.compile || {},
       );
