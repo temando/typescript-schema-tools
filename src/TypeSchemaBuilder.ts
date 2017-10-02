@@ -1,5 +1,7 @@
 import { map } from 'bluebird';
 import { clone, merge } from 'lutils';
+import { getProgramFromFiles } from 'typescript-json-schema';
+import { Program } from 'typescript-json-schema/node_modules/typescript';
 import {
   ISaveSchemasConfig, ITjsSchema,
   ITypesToSchemasConfig, saveSchemas, typesToSchemas,
@@ -17,16 +19,23 @@ export class TypeSchemaBuilder {
     errors?: Error[],
   }> = [];
 
+  private program?: Program;
+
   private saveConfig?: Partial<ISaveSchemasConfig>;
   private compileConfig?: Partial<ITypesToSchemasConfig>;
   private builderConfigs: IBuilderSchemaConfig[] = [];
 
-  constructor ({ save, compile }: {
+  constructor ({ save, compile = {}, reuseProgram = true }: {
     save?: Partial<ISaveSchemasConfig>,
     compile?: Partial<ITypesToSchemasConfig>,
+    reuseProgram?: boolean;
   }) {
     this.saveConfig = save;
     this.compileConfig = compile;
+
+    if (reuseProgram && compile.fromFiles) {
+      this.program = getProgramFromFiles(compile.fromFiles);
+    }
   }
 
   public add (schemaConfig: IBuilderSchemaConfig) {
@@ -38,6 +47,7 @@ export class TypeSchemaBuilder {
   public async compile () {
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
+        { program: this.program },
         clone(this.compileConfig || {}),
         config.compile || {},
       );

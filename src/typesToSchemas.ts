@@ -2,6 +2,7 @@ import { dereference } from '@jdw/jst';
 import { mkdirs, writeFile } from 'fs-extra';
 import { join } from 'path';
 import * as TJS from 'typescript-json-schema';
+import { Program } from 'typescript-json-schema/node_modules/typescript';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
@@ -36,6 +37,8 @@ export interface ITypesToSchemasConfig {
   options?: Partial<TJS.Args>;
 
   dereference?: boolean;
+
+  program?: Program;
 }
 
 /**
@@ -46,12 +49,11 @@ export async function typesToSchemas ({
   fromFiles, types,
   options = {},
   dereference: doDereference = false,
+  program = TJS.getProgramFromFiles(fromFiles),
 }: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
 }> {
-  const program = TJS.getProgramFromFiles(fromFiles);
-
   const schemas: ITjsSchema[] = [];
   const errors: Error[] = [];
 
