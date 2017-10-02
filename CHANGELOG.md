@@ -6,6 +6,9 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [2.2.0][] - 2017-10-02
 
+- Added `#addType` to `TypeSchemaBuilder`
+- `TypeSchemaBuilder` now re-uses the ts `Program` for performance
+
 ## [2.1.2][] - 2017-09-28
 
 - Tweaks
