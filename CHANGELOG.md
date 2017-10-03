@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Update `.addType` to support `id`
+
 ## [2.2.0][] - 2017-10-02
 
 - Added `#addType` to `TypeSchemaBuilder`
