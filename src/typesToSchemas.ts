@@ -19,21 +19,23 @@ export const defaultOptions: Partial<Args> = {
   ignoreErrors: true, // Remove when we upgrade
 };
 
+export interface ITypeMap {
+  /** Required when `asDefaultExport` is `false` */
+  name?: string;
+
+  /** The typescript type to generate from */
+  type: string;
+
+  /** Can be used to set `schema.id` if it is not set */
+  id?: string;
+}
+
 export interface ITypesToSchemasConfig {
   /** The TS files to fetch types from, or an existing ts.Program */
   fromFiles: string[] | IProgram;
 
   /** A hash of { [exportName]: typeName } */
-  types: Array<{
-    /** Required when `asDefaultExport` is `false` */
-    name?: string;
-
-    /** The typescript type to generate from */
-    type: string;
-
-    /** Can be used to set `schema.id` if it is not set */
-    id?: string;
-  }>;
+  types: ITypeMap[];
 
   /** TJS options to override */
   options?: Partial<Args>;

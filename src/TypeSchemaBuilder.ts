@@ -1,19 +1,14 @@
 import { map } from 'bluebird';
 import { clone, isArray, merge } from 'lutils';
-import { getTsProgram } from './';
 import {
-  ISaveSchemasConfig, ITjsSchema,
-  ITypesToSchemasConfig, saveSchemas, typesToSchemas,
+  getTsProgram, ISaveSchemasConfig,
+  ITjsSchema, ITypeMap, ITypesToSchemasConfig,
+  saveSchemas, typesToSchemas,
 } from './typesToSchemas';
 
 export interface IBuilderSchemaConfig {
   save?: Partial<ISaveSchemasConfig>;
   compile?: Partial<ITypesToSchemasConfig>;
-}
-
-export interface IAddTypeConfig {
-  type: string;
-  name?: string;
 }
 
 export class TypeSchemaBuilder {
@@ -52,13 +47,13 @@ export class TypeSchemaBuilder {
   }
 
   /** A simplified method, like #add(), to map a type to a name */
-  public addType (configs: IAddTypeConfig|IAddTypeConfig[]) {
+  public addType (configs: ITypeMap|ITypeMap[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(
-      configs.map(({ type, name = type }) => {
+      configs.map(({ type, name = type, id }) => {
         return {
-          compile: { types: [{ type,name }] },
+          compile: { types: [{ type, name, id }] },
           save: { name },
         };
       }),
