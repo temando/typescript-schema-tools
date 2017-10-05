@@ -133,9 +133,6 @@ function findRefsInSchema (schema: any, refs: string[]): string[] {
   if (!(schema instanceof Object)) { return matches; }
 
   for (const key of Object.keys(schema)) {
-    if (key === '$ref') {
-      console.log(refs, schema[key], key, refs.includes(schema[key]));
-    }
     if (key === '$ref' && refs.includes(schema[key])) {
       matches.push(schema[key]);
       continue;
@@ -160,7 +157,7 @@ export function removeUnusedJsonSchemaDefinitions (schema: any) {
   const definitionKeys: string[] = Object.keys(schema.definitions).map((key) => `#/definitions/${key}`);
 
   const definitionsInUse = findRefsInSchema(schema, definitionKeys);
-  console.log({ definitionsInUse });
+
   Object.keys(newSchema.definitions).forEach((key) => {
     if (!definitionsInUse.includes(`#/definitions/${key}`)) {
       delete newSchema.definitions[key];
