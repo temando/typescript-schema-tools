@@ -25,16 +25,19 @@ export interface ITypesToSchemasConfig {
     /** TJS options to override */
     options?: Partial<Args>;
     dereference?: boolean;
-    refs?: {
+    /** A hash of [type]: id for generating { $ref: id } in place of inline schemas */
+    refOverrides?: {
         [key: string]: string;
     };
+    /** Replace all types with $ref to their ids instead of inlining them */
+    replaceRefs?: boolean;
 }
 export declare function getTsProgram(fromFiles: string[] | IProgram): IProgram;
 /**
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.
  */
-export declare function typesToSchemas({fromFiles, types, options, dereference: doDereference, refs}: ITypesToSchemasConfig): Promise<{
+export declare function typesToSchemas({fromFiles, types, options, dereference: doDereference, refOverrides, replaceRefs}: ITypesToSchemasConfig): Promise<{
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
