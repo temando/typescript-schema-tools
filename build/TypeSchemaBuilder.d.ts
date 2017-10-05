@@ -3,6 +3,9 @@ export interface IBuilderSchemaConfig {
     save?: Partial<ISaveSchemasConfig>;
     compile?: Partial<ITypesToSchemasConfig>;
 }
+/**
+ * An friendlier API for building multiple schemas by sharing configurations
+ */
 export declare class TypeSchemaBuilder {
     compiled: Array<{
         schemas: ITjsSchema[];

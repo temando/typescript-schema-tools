@@ -4,6 +4,9 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Now supports `refs` inside a `compile` block
+  - This allows one to override any `type` to resolve to `{ $ref: id }`
+
 ## [2.3.0][] - 2017-10-03
 
 - Update `.addType` to support `id`

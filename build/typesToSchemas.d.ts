@@ -25,13 +25,16 @@ export interface ITypesToSchemasConfig {
     /** TJS options to override */
     options?: Partial<Args>;
     dereference?: boolean;
+    refs?: {
+        [key: string]: string;
+    };
 }
 export declare function getTsProgram(fromFiles: string[] | IProgram): IProgram;
 /**
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.
  */
-export declare function typesToSchemas({fromFiles, types, options, dereference: doDereference}: ITypesToSchemasConfig): Promise<{
+export declare function typesToSchemas({fromFiles, types, options, dereference: doDereference, refs}: ITypesToSchemasConfig): Promise<{
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
