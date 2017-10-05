@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.3.0][] - 2017-10-05
+
 - Now supports `refs` inside a `compile` block
   - This allows one to override any `type` to resolve to `{ $ref: id }`
 
@@ -47,6 +49,7 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
 [Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.3.0...HEAD
+[2.3.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.3.0...v2.3.0
 [2.3.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.2.0...v2.3.0
 [2.2.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.1.2...v2.2.0
 [2.1.2]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.1.2...v2.1.2
