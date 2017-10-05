@@ -2,7 +2,7 @@ import { dereference } from '@jdw/jst';
 import { mkdirs, writeFile } from 'fs-extra';
 import { isArray } from 'lutils';
 import { join } from 'path';
-import { Args, buildGenerator, generateSchema, getProgramFromFiles, JsonSchemaGenerator } from 'typescript-json-schema';
+import { Args, buildGenerator, getProgramFromFiles, JsonSchemaGenerator } from 'typescript-json-schema';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
