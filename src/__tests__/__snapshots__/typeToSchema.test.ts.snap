@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`annotatedReffedSchema 1`] = `
+Array [
+  Object {
+    "name": undefined,
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "$ref": "test-ref#",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+    "type": "IRefTest",
+  },
+]
+`;
+
 exports[`builderSeperateOne 1`] = `
 Object {
   "default": Object {
@@ -25,6 +47,32 @@ Object {
   "default": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
+    "definitions": Object {
+      "IRefMe": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "a": Object {
+            "additionalProperties": false,
+            "properties": Object {
+              "c": Object {
+                "enum": Array [
+                  1,
+                ],
+                "type": "number",
+              },
+            },
+            "required": Array [
+              "c",
+            ],
+            "type": "object",
+          },
+        },
+        "required": Array [
+          "a",
+        ],
+        "type": "object",
+      },
+    },
     "properties": Object {
       "c": Object {
         "enum": Array [
@@ -34,9 +82,16 @@ Object {
         ],
         "type": "number",
       },
+      "reffed": Object {
+        "items": Object {
+          "$ref": "#/definitions/IRefMe",
+        },
+        "type": "array",
+      },
     },
     "required": Array [
       "c",
+      "reffed",
     ],
     "type": "object",
   },
@@ -63,6 +118,32 @@ Object {
   "builderTogetherTwo": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
+    "definitions": Object {
+      "IRefMe": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "a": Object {
+            "additionalProperties": false,
+            "properties": Object {
+              "c": Object {
+                "enum": Array [
+                  1,
+                ],
+                "type": "number",
+              },
+            },
+            "required": Array [
+              "c",
+            ],
+            "type": "object",
+          },
+        },
+        "required": Array [
+          "a",
+        ],
+        "type": "object",
+      },
+    },
     "properties": Object {
       "c": Object {
         "enum": Array [
@@ -72,9 +153,16 @@ Object {
         ],
         "type": "number",
       },
+      "reffed": Object {
+        "items": Object {
+          "$ref": "#/definitions/IRefMe",
+        },
+        "type": "array",
+      },
     },
     "required": Array [
       "c",
+      "reffed",
     ],
     "type": "object",
   },
@@ -101,6 +189,32 @@ Object {
   "builderTogetherTwo": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
+    "definitions": Object {
+      "IRefMe": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "a": Object {
+            "additionalProperties": false,
+            "properties": Object {
+              "c": Object {
+                "enum": Array [
+                  1,
+                ],
+                "type": "number",
+              },
+            },
+            "required": Array [
+              "c",
+            ],
+            "type": "object",
+          },
+        },
+        "required": Array [
+          "a",
+        ],
+        "type": "object",
+      },
+    },
     "properties": Object {
       "c": Object {
         "enum": Array [
@@ -110,9 +224,16 @@ Object {
         ],
         "type": "number",
       },
+      "reffed": Object {
+        "items": Object {
+          "$ref": "#/definitions/IRefMe",
+        },
+        "type": "array",
+      },
     },
     "required": Array [
       "c",
+      "reffed",
     ],
     "type": "object",
   },
@@ -139,6 +260,32 @@ Object {
   "Test2": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
+    "definitions": Object {
+      "IRefMe": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "a": Object {
+            "additionalProperties": false,
+            "properties": Object {
+              "c": Object {
+                "enum": Array [
+                  1,
+                ],
+                "type": "number",
+              },
+            },
+            "required": Array [
+              "c",
+            ],
+            "type": "object",
+          },
+        },
+        "required": Array [
+          "a",
+        ],
+        "type": "object",
+      },
+    },
     "properties": Object {
       "c": Object {
         "enum": Array [
@@ -148,9 +295,16 @@ Object {
         ],
         "type": "number",
       },
+      "reffed": Object {
+        "items": Object {
+          "$ref": "#/definitions/IRefMe",
+        },
+        "type": "array",
+      },
     },
     "required": Array [
       "c",
+      "reffed",
     ],
     "type": "object",
   },
@@ -164,7 +318,6 @@ Array [
     "schema": Object {
       "$schema": "http://json-schema.org/draft-04/schema#",
       "additionalProperties": false,
-      "id": undefined,
       "properties": Object {
         "a": Object {
           "description": "a",
@@ -184,7 +337,32 @@ Array [
     "schema": Object {
       "$schema": "http://json-schema.org/draft-04/schema#",
       "additionalProperties": false,
-      "id": undefined,
+      "definitions": Object {
+        "IRefMe": Object {
+          "additionalProperties": false,
+          "properties": Object {
+            "a": Object {
+              "additionalProperties": false,
+              "properties": Object {
+                "c": Object {
+                  "enum": Array [
+                    1,
+                  ],
+                  "type": "number",
+                },
+              },
+              "required": Array [
+                "c",
+              ],
+              "type": "object",
+            },
+          },
+          "required": Array [
+            "a",
+          ],
+          "type": "object",
+        },
+      },
       "properties": Object {
         "c": Object {
           "enum": Array [
@@ -194,9 +372,55 @@ Array [
           ],
           "type": "number",
         },
+        "reffed": Object {
+          "items": Object {
+            "$ref": "#/definitions/IRefMe",
+          },
+          "type": "array",
+        },
       },
       "required": Array [
         "c",
+        "reffed",
+      ],
+      "type": "object",
+    },
+    "type": "ITest2",
+  },
+]
+`;
+
+exports[`reffedSchema 1`] = `
+Array [
+  Object {
+    "name": "Test2",
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "definitions": Object {
+        "IRefMe": Object {
+          "$ref": "ref-me#",
+        },
+      },
+      "properties": Object {
+        "c": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "type": "number",
+        },
+        "reffed": Object {
+          "items": Object {
+            "$ref": "#/definitions/IRefMe",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "c",
+        "reffed",
       ],
       "type": "object",
     },
@@ -222,7 +446,6 @@ Object {
   "schema": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
-    "id": undefined,
     "properties": Object {
       "a": Object {
         "description": "a",

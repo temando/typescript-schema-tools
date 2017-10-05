@@ -11,8 +11,11 @@ export interface IBuilderSchemaConfig {
   compile?: Partial<ITypesToSchemasConfig>;
 }
 
+/**
+ * An friendlier API for building multiple schemas by sharing configurations
+ */
 export class TypeSchemaBuilder {
-  public compiled: Array<{
+  compiled: Array<{
     schemas: ITjsSchema[],
     config: IBuilderSchemaConfig,
     errors?: Error[],
@@ -38,7 +41,7 @@ export class TypeSchemaBuilder {
   }
 
   /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
-  public add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
+  add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.builderConfigs.push(...configs);
@@ -47,7 +50,7 @@ export class TypeSchemaBuilder {
   }
 
   /** A simplified method, like #add(), to map a type to a name */
-  public addType (configs: ITypeMap|ITypeMap[]) {
+  addType (configs: ITypeMap|ITypeMap[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(
@@ -62,7 +65,7 @@ export class TypeSchemaBuilder {
     return this;
   }
 
-  public async compile () {
+  async compile () {
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
         clone(this.compileConfig || {}),
@@ -81,7 +84,7 @@ export class TypeSchemaBuilder {
     return this.compiled;
   }
 
-  public async save (compiled = this.compiled) {
+  async save (compiled = this.compiled) {
     await map(compiled, async ({ config, schemas: schemaConfigs, errors }) => {
       if (errors) { return; }
 
@@ -111,7 +114,7 @@ export class TypeSchemaBuilder {
     });
   }
 
-  public async compileAndSave () {
+  async compileAndSave () {
     await this.compile();
     await this.save();
 

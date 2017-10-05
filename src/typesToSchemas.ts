@@ -2,7 +2,7 @@ import { dereference } from '@jdw/jst';
 import { mkdirs, writeFile } from 'fs-extra';
 import { isArray } from 'lutils';
 import { join } from 'path';
-import { Args, generateSchema, getProgramFromFiles } from 'typescript-json-schema';
+import { Args, buildGenerator, generateSchema, getProgramFromFiles, JsonSchemaGenerator } from 'typescript-json-schema';
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
@@ -42,6 +42,8 @@ export interface ITypesToSchemasConfig {
 
   dereference?: boolean;
 
+  refs?: { [key: string]: string };
+
 }
 
 export function getTsProgram (fromFiles: string[]|IProgram): IProgram {
@@ -60,6 +62,7 @@ export async function typesToSchemas ({
   fromFiles, types,
   options = {},
   dereference: doDereference = false,
+  refs,
 }: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
@@ -69,20 +72,30 @@ export async function typesToSchemas ({
   const schemas: ITjsSchema[] = [];
   const errors: Error[] = [];
 
+  const generator = <JsonSchemaGenerator> buildGenerator(program as any, {
+    ...defaultOptions,
+    ...options,
+  });
+
+  if (refs) {
+    for (const type of Object.keys(refs)) {
+      const $ref = refs[type];
+
+      generator.setSchemaOverride(type, { $ref });
+    }
+  }
+
   types.forEach(({ name, type, id }) => {
     let schema: any;
 
     try {
-      schema = generateSchema(program as any, type, {
-        ...defaultOptions,
-        ...options,
-      });
+      schema = generator.getSchemaForSymbol(type);
     } catch (error) {
       errors.push(error);
     }
 
     if (schema) {
-      schema.id = schema.id || id;
+      if (id && !schema.id) { schema.id = id; }
 
       if (doDereference) { schema = dereference(schema, undefined as any); }
 

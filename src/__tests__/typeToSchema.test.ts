@@ -41,6 +41,33 @@ describe('typeToSchema', () => {
       expect(errors).toBeFalsy();
       expect(schemas).toMatchSnapshot('multipleSchemas');
     });
+
+    it('produces a schema with an overridden $ref', async () => {
+      const ref = 'ref-me#';
+
+      const { errors, schemas } = await typesToSchemas({
+        refs: { IRefMe: ref },
+        fromFiles: [join(__dirname, './fixtures/types.ts')],
+        types: [{ name: 'Test2', type: 'ITest2' }],
+      });
+
+      expect(errors).toBeFalsy();
+      expect(schemas).toMatchSnapshot('reffedSchema');
+
+      expect(schemas[0].schema.definitions.IRefMe.$ref).toBe(ref);
+    });
+
+    it('produces a schema with an annotated $ref', async () => {
+      const { errors, schemas } = await typesToSchemas({
+        fromFiles: [join(__dirname, './fixtures/types.ts')],
+        types: [{ type: 'IRefTest' }],
+      });
+
+      expect(errors).toBeFalsy();
+      expect(schemas).toMatchSnapshot('annotatedReffedSchema');
+
+      expect(schemas[0].schema.properties.a.$ref).toBe('test-ref#');
+    });
   });
 
   describe('saveSchemas()', () => {
