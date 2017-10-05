@@ -42,7 +42,11 @@ export interface ITypesToSchemasConfig {
 
   dereference?: boolean;
 
-  refs?: { [key: string]: string };
+  /** A hash of [type]: id for generating { $ref: id } in place of inline schemas */
+  refOverrides?: { [key: string]: string };
+
+  /** Replace all types with $ref to their ids instead of inlining them */
+  replaceRefs?: boolean;
 
 }
 
@@ -62,7 +66,8 @@ export async function typesToSchemas ({
   fromFiles, types,
   options = {},
   dereference: doDereference = false,
-  refs,
+  refOverrides,
+  replaceRefs,
 }: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
@@ -77,15 +82,30 @@ export async function typesToSchemas ({
     ...options,
   });
 
-  if (refs) {
-    for (const type of Object.keys(refs)) {
-      const $ref = refs[type];
+  const refsToReplace: Array<{ type: string, $ref: string }> = [];
 
-      generator.setSchemaOverride(type, { $ref });
+  // Add in all refOverrides to replace them with $refs
+  if (refOverrides) {
+    for (const type of Object.keys(refOverrides)) {
+      refsToReplace.push({ type, $ref: refOverrides[type] });
     }
   }
 
-  types.forEach(({ name, type, id }) => {
+  // When a `type` def has an associated id, we can use that as a $ref
+  if (replaceRefs) {
+    for (const { type, id: $ref } of types) {
+      if (!$ref) { continue; }
+
+      refsToReplace.push({ type, $ref });
+    }
+  }
+
+  // Set the overrides for $refs in the generator
+  for (const { type, $ref } of refsToReplace) {
+    generator.setSchemaOverride(type, { $ref });
+  }
+
+  for (const { name, type, id } of types) {
     let schema: any;
 
     try {
@@ -101,7 +121,7 @@ export async function typesToSchemas ({
 
       schemas.push({ name, type, schema });
     }
-  });
+  }
 
   return {
     errors: errors.length ? errors : undefined,

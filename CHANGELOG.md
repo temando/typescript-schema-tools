@@ -4,6 +4,9 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Change the `compile` interface, rename `refs` to `overrideRefs`
+- Add `replaceRefs` option, to use `id` when defining types to blanket-replace with a `$ref` in generated schemas
+
 ## [2.4.0][] - 2017-10-05
 
 - Fix publish
