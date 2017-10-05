@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Remove console logs
+
 ## [2.6.0][] - 2017-10-05
 
 - `$ref` can now be globally and automatically replaced when using `TypeSchemaBuilder`
