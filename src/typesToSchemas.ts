@@ -46,7 +46,9 @@ export interface ITypesToSchemasConfig {
   refOverrides?: { [key: string]: string };
 
   /** Replace all types with $ref to their ids instead of inlining them */
-  replaceRefs?: boolean;
+  replaceWithRefs?: boolean;
+
+  generator?: JsonSchemaGenerator;
 
 }
 
@@ -62,48 +64,20 @@ export function getTsProgram (fromFiles: string[]|IProgram): IProgram {
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.
  */
-export async function typesToSchemas ({
-  fromFiles, types,
-  options = {},
-  dereference: doDereference = false,
-  refOverrides,
-  replaceRefs,
-}: ITypesToSchemasConfig): Promise<{
+export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
   errors?: Error[];
   schemas: ITjsSchema[];
 }> {
-  const program = getTsProgram(fromFiles);
+  const {
+    types,
+    dereference: doDereference = false,
+    generator: inputGenerator,
+  } = config;
 
   const schemas: ITjsSchema[] = [];
   const errors: Error[] = [];
 
-  const generator = <JsonSchemaGenerator> buildGenerator(program as any, {
-    ...defaultOptions,
-    ...options,
-  });
-
-  const refsToReplace: Array<{ type: string, $ref: string }> = [];
-
-  // Add in all refOverrides to replace them with $refs
-  if (refOverrides) {
-    for (const type of Object.keys(refOverrides)) {
-      refsToReplace.push({ type, $ref: refOverrides[type] });
-    }
-  }
-
-  // When a `type` def has an associated id, we can use that as a $ref
-  if (replaceRefs) {
-    for (const { type, id: $ref } of types) {
-      if (!$ref) { continue; }
-
-      refsToReplace.push({ type, $ref });
-    }
-  }
-
-  // Set the overrides for $refs in the generator
-  for (const { type, $ref } of refsToReplace) {
-    generator.setSchemaOverride(type, { $ref });
-  }
+  const generator = inputGenerator || createTypeToSchemaGenerator(config);
 
   for (const { name, type, id } of types) {
     let schema: any;
@@ -117,6 +91,8 @@ export async function typesToSchemas ({
     if (schema) {
       if (id && !schema.id) { schema.id = id; }
 
+      schema = removeUnusedJsonSchemaDefinitions(schema);
+
       if (doDereference) { schema = dereference(schema, undefined as any); }
 
       schemas.push({ name, type, schema });
@@ -127,6 +103,92 @@ export async function typesToSchemas ({
     errors: errors.length ? errors : undefined,
     schemas,
   };
+}
+
+export function extractRefsFromConfig ({ refOverrides, replaceWithRefs, types }: ITypesToSchemasConfig) {
+  const refsToReplace: Array<{ type: string, $ref: string }> = [];
+
+  // Add in all refOverrides to replace them with $refs
+  if (refOverrides) {
+    for (const type of Object.keys(refOverrides)) {
+      refsToReplace.push({ type, $ref: refOverrides[type] });
+    }
+  }
+
+  // When a `type` def has an associated id, we can use that as a $ref
+  if (replaceWithRefs && types) {
+    for (const { type, id: $ref } of types) {
+      if (!$ref) { continue; }
+
+      refsToReplace.push({ type, $ref });
+    }
+  }
+
+  return refsToReplace;
+}
+
+function findRefsInSchema (schema: any, refs: string[]): string[] {
+  const matches: string[] = [];
+
+  if (!(schema instanceof Object)) { return matches; }
+
+  for (const key of Object.keys(schema)) {
+    if (key === '$ref') {
+      console.log(refs, schema[key], key, refs.includes(schema[key]));
+    }
+    if (key === '$ref' && refs.includes(schema[key])) {
+      matches.push(schema[key]);
+      continue;
+    }
+
+    matches.push(...findRefsInSchema(schema[key], refs));
+  }
+
+  return matches;
+}
+
+export function removeUnusedJsonSchemaDefinitions (schema: any) {
+  if (!schema.definitions) { return schema; }
+
+  const newSchema = {
+    ...schema,
+    definitions: {
+      ...schema.definitions,
+    },
+  };
+
+  const definitionKeys: string[] = Object.keys(schema.definitions).map((key) => `#/definitions/${key}`);
+
+  const definitionsInUse = findRefsInSchema(schema, definitionKeys);
+  console.log({ definitionsInUse });
+  Object.keys(newSchema.definitions).forEach((key) => {
+    if (!definitionsInUse.includes(`#/definitions/${key}`)) {
+      delete newSchema.definitions[key];
+    }
+  });
+
+  return newSchema;
+}
+
+export function createTypeToSchemaGenerator (config: ITypesToSchemasConfig) {
+  const { fromFiles, options } = config;
+
+  const program = getTsProgram(fromFiles);
+
+  const generator = <JsonSchemaGenerator> buildGenerator(program as any, {
+    ...defaultOptions,
+    ...options,
+  });
+
+  const refsToReplace = extractRefsFromConfig(config);
+
+  // Set the overrides for $refs in the generator
+  for (const { type, $ref } of refsToReplace) {
+    generator.setSchemaOverride(type, { $ref });
+  }
+
+  return generator;
+
 }
 
 export interface ISaveSchemasConfig {

@@ -12,13 +12,16 @@ export declare class TypeSchemaBuilder {
         config: IBuilderSchemaConfig;
         errors?: Error[];
     }>;
+    private replaceWithRefs;
     private saveConfig?;
     private compileConfig?;
     private builderConfigs;
-    constructor({save, compile, reuseProgram}: {
+    constructor({save, compile, reuseProgram, replaceWithRefs}: {
         save?: Partial<ISaveSchemasConfig>;
         compile?: Partial<ITypesToSchemasConfig>;
         reuseProgram?: boolean;
+        /** Whether to resolve all schemas to $ref's when possible */
+        replaceWithRefs?: boolean;
     });
     /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
     add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;

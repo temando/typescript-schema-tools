@@ -1,4 +1,4 @@
-import { Args } from 'typescript-json-schema';
+import { Args, JsonSchemaGenerator } from 'typescript-json-schema';
 import { IGetImportPath } from './lib/schemaRenderers';
 export interface ITjsSchema {
     name?: string;
@@ -30,17 +30,24 @@ export interface ITypesToSchemasConfig {
         [key: string]: string;
     };
     /** Replace all types with $ref to their ids instead of inlining them */
-    replaceRefs?: boolean;
+    replaceWithRefs?: boolean;
+    generator?: JsonSchemaGenerator;
 }
 export declare function getTsProgram(fromFiles: string[] | IProgram): IProgram;
 /**
  * Reads TypeScript files using `typescript-json-schema` and returns both
  * errors and the resulting schemas.
  */
-export declare function typesToSchemas({fromFiles, types, options, dereference: doDereference, refOverrides, replaceRefs}: ITypesToSchemasConfig): Promise<{
+export declare function typesToSchemas(config: ITypesToSchemasConfig): Promise<{
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
+export declare function extractRefsFromConfig({refOverrides, replaceWithRefs, types}: ITypesToSchemasConfig): {
+    type: string;
+    $ref: string;
+}[];
+export declare function removeUnusedJsonSchemaDefinitions(schema: any): any;
+export declare function createTypeToSchemaGenerator(config: ITypesToSchemasConfig): JsonSchemaGenerator;
 export interface ISaveSchemasConfig {
     /** The file format to save as  */
     format: 'ts' | 'json';
