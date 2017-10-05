@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.4.0][] - 2017-10-05
+
 - Fix publish
 
 ## [2.3.0][] - 2017-10-05
@@ -50,7 +52,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.3.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.4.0...HEAD
+[2.4.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.3.0...v2.4.0
 [2.3.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.3.0...v2.3.0
 [2.3.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.2.0...v2.3.0
 [2.2.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.1.2...v2.2.0
