@@ -46,7 +46,7 @@ describe('typeToSchema', () => {
       const ref = 'ref-me#';
 
       const { errors, schemas } = await typesToSchemas({
-        refs: { IRefMe: ref },
+        refOverrides: { IRefMe: ref },
         fromFiles: [join(__dirname, './fixtures/types.ts')],
         types: [{ name: 'Test2', type: 'ITest2' }],
       });
