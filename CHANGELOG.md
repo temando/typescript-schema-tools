@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- `$ref` can now be globally and automatically replaced when using `TypeSchemaBuilder`
+
 ## [2.5.0][] - 2017-10-05
 
 - Change the `compile` interface, rename `refs` to `overrideRefs`
