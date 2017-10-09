@@ -41,6 +41,6 @@
     "bluebird": "^3.5.0",
     "fs-extra": "^4.0.2",
     "lutils": "^2.4.0",
-    "typescript-json-schema": "^0.16.0"
+    "typescript-json-schema": "^0.17.0"
   }
 }

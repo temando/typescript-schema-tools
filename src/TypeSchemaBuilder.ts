@@ -86,6 +86,11 @@ export class TypeSchemaBuilder {
       }
     }
 
+    // TODO: if we read the symbols without compiling schema, we may be able to extract
+    // the id annotation, then compile
+    // TODO: option two: add a recursive lookup for $ref as per the extract function
+    // and manually replace each occurance AFTER compilation
+
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
         clone(this.compileConfig || {}),
