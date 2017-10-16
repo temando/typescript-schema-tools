@@ -4,6 +4,12 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+### Added
+
+- `createSchemaModuleMap` creates a map resembling `[schema.id]: modulePath`
+- `renderSchemaModuleMapToTs` renders a moduleMap to typeScript
+- Wired the above into `TypeSchemaBuilder` by use of the new `.saveSchemaModuleMap()`
+
 ## [2.6.1][] - 2017-10-05
 
 - Remove console logs

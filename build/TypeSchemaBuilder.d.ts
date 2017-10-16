@@ -18,8 +18,6 @@ export declare class TypeSchemaBuilder {
         config: IBuilderSchemaConfig;
         errors?: Error[];
     }>;
-    /** Merely an array of promises we wait for when .compileAndSave() is called */
-    private queued;
     private replaceWithRefs;
     private saveConfig;
     private compileConfig;
@@ -35,9 +33,7 @@ export declare class TypeSchemaBuilder {
     add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
     /** A simplified method, like #add(), to map a type to a name */
     addType(configs: ITypeMap | ITypeMap[]): this;
-    /** Queue this up so we only have to run .compileAndSave() */
-    addSchemaModuleMap(config: ISchemaModuleMapParams): this;
-    compileAndSave(): Promise<void>;
+    compileAndSave(): Promise<this>;
     compile(): Promise<{
         schemas: ITjsSchema[];
         config: IBuilderSchemaConfig;

@@ -30,8 +30,6 @@ export class TypeSchemaBuilder {
     errors?: Error[],
   }> = [];
 
-  /** Merely an array of promises we wait for when .compileAndSave() is called */
-  private queued: Array<Promise<any>> = [];
   private replaceWithRefs: boolean;
   private saveConfig: Partial<ISaveSchemasConfig>;
   private compileConfig: Partial<ITypesToSchemasConfig>;
@@ -85,13 +83,6 @@ export class TypeSchemaBuilder {
     return this;
   }
 
-  /** Queue this up so we only have to run .compileAndSave() */
-  addSchemaModuleMap (config: ISchemaModuleMapParams) {
-    this.queued.push(this.saveSchemaModuleMap(config));
-
-    return this;
-  }
-
   //
   // Async interfaces
   //
@@ -100,7 +91,7 @@ export class TypeSchemaBuilder {
     await this.compile();
     await this.save();
 
-    if (this.queued.length) { await Promise.all(this.queued); }
+    return this;
   }
 
   async compile () {
