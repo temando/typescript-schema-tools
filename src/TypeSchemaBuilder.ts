@@ -1,6 +1,8 @@
 import { map } from 'bluebird';
+import { writeFile } from 'fs-extra';
 import { clone, isArray, merge } from 'lutils';
 import { extractRefsFromConfig } from './';
+import { createSchemaModuleMap, ISchemasInput, renderSchemaModuleMapToTs } from './schemaModuleMap';
 import {
   getTsProgram, ISaveSchemasConfig,
   ITjsSchema, ITypeMap, ITypesToSchemasConfig,
@@ -10,6 +12,12 @@ import {
 export interface IBuilderSchemaConfig {
   save?: Partial<ISaveSchemasConfig>;
   compile?: Partial<ITypesToSchemasConfig>;
+}
+
+export interface ISchemaModuleMapParams {
+  schemas: ISchemasInput;
+  moduleBase: string;
+  fileName: string;
 }
 
 /**
@@ -22,12 +30,14 @@ export class TypeSchemaBuilder {
     errors?: Error[],
   }> = [];
 
+  /** Merely an array of promises we wait for when .compileAndSave() is called */
+  private queued: Array<Promise<any>> = [];
   private replaceWithRefs: boolean;
-  private saveConfig?: Partial<ISaveSchemasConfig>;
-  private compileConfig?: Partial<ITypesToSchemasConfig>;
+  private saveConfig: Partial<ISaveSchemasConfig>;
+  private compileConfig: Partial<ITypesToSchemasConfig>;
   private builderConfigs: IBuilderSchemaConfig[] = [];
 
-  constructor ({ save, compile = {}, reuseProgram = true, replaceWithRefs = true }: {
+  constructor ({ save = {}, compile = {}, reuseProgram = true, replaceWithRefs = true }: {
     save?: Partial<ISaveSchemasConfig>,
     compile?: Partial<ITypesToSchemasConfig>,
     reuseProgram?: boolean;
@@ -45,6 +55,10 @@ export class TypeSchemaBuilder {
       this.compileConfig.fromFiles = getTsProgram(fromFiles);
     }
   }
+
+  //
+  // Fluid interfaces
+  //
 
   /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
   add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
@@ -69,6 +83,24 @@ export class TypeSchemaBuilder {
     );
 
     return this;
+  }
+
+  /** Queue this up so we only have to run .compileAndSave() */
+  addSchemaModuleMap (config: ISchemaModuleMapParams) {
+    this.queued.push(this.saveSchemaModuleMap(config));
+
+    return this;
+  }
+
+  //
+  // Async interfaces
+  //
+
+  async compileAndSave () {
+    await this.compile();
+    await this.save();
+
+    if (this.queued.length) { await Promise.all(this.queued); }
   }
 
   async compile () {
@@ -140,10 +172,17 @@ export class TypeSchemaBuilder {
     });
   }
 
-  async compileAndSave () {
-    await this.compile();
-    await this.save();
+  async saveSchemaModuleMap ({ schemas, moduleBase, fileName = '_map' }: ISchemaModuleMapParams) {
+    const moduleMap = createSchemaModuleMap({ schemas, moduleBase });
 
-    return this;
+    const { directory } = this.saveConfig;
+
+    if (!directory) {
+      throw new Error('Cannot save the schemaModuleMap as no `save.directory` was specified');
+    }
+
+    const filePath = `${directory}/${fileName}.ts`;
+
+    await writeFile(filePath, renderSchemaModuleMapToTs(moduleMap));
   }
 }
