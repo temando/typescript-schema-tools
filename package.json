@@ -15,7 +15,7 @@
     "test:coverage": "jest src --coverage",
     "coverage": "jest src --coverage",
     "lint": "tslint --project tsconfig.json --type-check",
-    "release": "cd build && npm publish",
+    "release": "cd build && yarn publish .",
     "build": "bash -v -e scripts/build",
     "build:link": "yarn build && cd build && yarn link",
     "preversion": "yarn lint && yarn build && yarn test && changelog-verify CHANGELOG.md && git add build/*.d.ts",
