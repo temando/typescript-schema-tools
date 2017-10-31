@@ -13,6 +13,7 @@ export interface IBuilderSchemaConfig {
   save?: Partial<ISaveSchemasConfig>;
   compile?: Partial<ITypesToSchemasConfig>;
 }
+export type ITypeMapBuilderConfig = ITypeMap & IBuilderSchemaConfig;
 
 export interface ISchemaModuleMapParams {
   schemas: ISchemasInput;
@@ -68,15 +69,18 @@ export class TypeSchemaBuilder {
   }
 
   /** A simplified method, like #add(), to map a type to a name */
-  addType (configs: ITypeMap|ITypeMap[]) {
+  addType (configs: ITypeMapBuilderConfig|ITypeMapBuilderConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(
-      configs.map(({ type, name = type, id }) => {
-        return {
-          compile: { types: [{ type, name, id }] },
-          save: { name },
-        };
+      configs.map(({ type, name = type, id, compile = {}, save = {} }) => {
+        return merge(
+          {
+            compile: { types: [{ type, name, id }] },
+            save: { name },
+          },
+          { compile, save },
+        );
       }),
     );
 

@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- `.addType` on the `TypeSchemaBuilder` now accepts a `save` and `compile` optional additional configuration
+
 ## [2.7.0][] - 2017-10-16
 
 ### Added

@@ -4,6 +4,7 @@ export interface IBuilderSchemaConfig {
     save?: Partial<ISaveSchemasConfig>;
     compile?: Partial<ITypesToSchemasConfig>;
 }
+export declare type ITypeMapBuilderConfig = ITypeMap & IBuilderSchemaConfig;
 export interface ISchemaModuleMapParams {
     schemas: ISchemasInput;
     moduleBase: string;
@@ -32,7 +33,7 @@ export declare class TypeSchemaBuilder {
     /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
     add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
     /** A simplified method, like #add(), to map a type to a name */
-    addType(configs: ITypeMap | ITypeMap[]): this;
+    addType(configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]): this;
     compileAndSave(): Promise<this>;
     compile(): Promise<{
         schemas: ITjsSchema[];
