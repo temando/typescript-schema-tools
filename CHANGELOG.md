@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.9.0][] - 2017-10-31
+
 ## [2.8.0][] - 2017-10-31
 
 - `.addType` on the `TypeSchemaBuilder` now accepts a `save` and `compile` optional additional configuration
@@ -77,7 +79,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.8.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.9.0...HEAD
+[2.9.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.8.0...v2.9.0
 [2.8.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.7.0...v2.8.0
 [2.7.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.6.1...v2.7.0
 [2.6.1]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.6.0...v2.6.1
