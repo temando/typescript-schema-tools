@@ -219,8 +219,6 @@ export async function saveSchemas ({ schemas, directory, name, format, asDefault
     throw new Error(`You are trying to default export more than one schema`);
   }
 
-  console.log({ directory });
-
   await mkdirs(directory);
 
   const filePath = join(directory, `${name}.${format}`);
