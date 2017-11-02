@@ -4,7 +4,11 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- set `aliasRef` in the compiler options to `true` by default
+
 ## [2.9.0][] - 2017-10-31
+
+- Fixes
 
 ## [2.8.0][] - 2017-10-31
 
