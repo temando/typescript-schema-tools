@@ -17,6 +17,7 @@ export const defaultOptions: Partial<Args> = {
   required: true,
   noExtraProps: true,
   ignoreErrors: true, // Remove when we upgrade
+  aliasRef: true,
 };
 
 export interface ITypeMap {
