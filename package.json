@@ -13,7 +13,6 @@
   "scripts": {
     "test": "jest src",
     "test:coverage": "jest src --coverage",
-    "coverage": "jest src --coverage",
     "lint": "tslint --project tsconfig.json --type-check",
     "release": "cd build && yarn publish",
     "build": "bash -v -e scripts/build",
