@@ -20,15 +20,18 @@ export declare class TypeSchemaBuilder {
         errors?: Error[];
     }>;
     private replaceWithRefs;
+    private emitErrors;
     private saveConfig;
     private compileConfig;
     private builderConfigs;
-    constructor({save, compile, reuseProgram, replaceWithRefs}: {
+    constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors}: {
         save?: Partial<ISaveSchemasConfig>;
         compile?: Partial<ITypesToSchemasConfig>;
         reuseProgram?: boolean;
         /** Whether to resolve all schemas to $ref's when possible */
         replaceWithRefs?: boolean;
+        /** Whether to emit errors to the console on compilation */
+        emitErrors?: boolean;
     });
     /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
     add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;

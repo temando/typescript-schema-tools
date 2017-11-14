@@ -32,21 +32,30 @@ export class TypeSchemaBuilder {
   }> = [];
 
   private replaceWithRefs: boolean;
+  private emitErrors: boolean;
   private saveConfig: Partial<ISaveSchemasConfig>;
   private compileConfig: Partial<ITypesToSchemasConfig>;
   private builderConfigs: IBuilderSchemaConfig[] = [];
 
-  constructor ({ save = {}, compile = {}, reuseProgram = true, replaceWithRefs = true }: {
+  constructor ({
+    save = {}, compile = {},
+    reuseProgram = true, replaceWithRefs = true,
+    emitErrors = true,
+  }: {
     save?: Partial<ISaveSchemasConfig>,
     compile?: Partial<ITypesToSchemasConfig>,
     reuseProgram?: boolean;
 
     /** Whether to resolve all schemas to $ref's when possible */
     replaceWithRefs?: boolean;
+
+    /** Whether to emit errors to the console on compilation */
+    emitErrors?: boolean;
   }) {
     this.saveConfig = save;
     this.compileConfig = compile;
     this.replaceWithRefs = replaceWithRefs;
+    this.emitErrors = emitErrors;
 
     const { fromFiles } = this.compileConfig;
 
@@ -126,6 +135,10 @@ export class TypeSchemaBuilder {
       );
 
       const { errors, schemas } = await typesToSchemas(mergedConfig);
+
+      if (this.emitErrors && errors) {
+        errors.forEach(console.error);
+      }
 
       this.compiled.push({
         schemas,
