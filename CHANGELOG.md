@@ -4,6 +4,9 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Added `emitErrors` config option to `TypeSchemaBuilder`
+  - Will emit errors to console.error on compilation if `true` (default)
+
 ## [2.10.0][] - 2017-11-02
 
 - set `aliasRef` in the compiler options to `true` by default
