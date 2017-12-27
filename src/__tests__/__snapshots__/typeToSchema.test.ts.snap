@@ -1,104 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`annotatedReffedSchema 1`] = `
-Array [
-  Object {
-    "name": undefined,
-    "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "additionalProperties": false,
-      "properties": Object {
-        "a": Object {
-          "$ref": "test-ref#",
-        },
-      },
-      "required": Array [
-        "a",
-      ],
-      "type": "object",
-    },
-    "type": "IRefTest",
-  },
-]
-`;
-
-exports[`builderSeperateOne 1`] = `
-Object {
-  "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "additionalProperties": false,
-    "properties": Object {
-      "a": Object {
-        "description": "a",
-        "minimum": 1,
-        "type": "number",
-      },
-    },
-    "required": Array [
-      "a",
-    ],
-    "type": "object",
-  },
-}
-`;
-
-exports[`builderSeperateTwo 1`] = `
-Object {
-  "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "additionalProperties": false,
-    "definitions": Object {
-      "IRefMe": Object {
-        "additionalProperties": false,
-        "properties": Object {
-          "a": Object {
-            "additionalProperties": false,
-            "properties": Object {
-              "c": Object {
-                "enum": Array [
-                  1,
-                ],
-                "type": "number",
-              },
-            },
-            "required": Array [
-              "c",
-            ],
-            "type": "object",
-          },
-        },
-        "required": Array [
-          "a",
-        ],
-        "type": "object",
-      },
-    },
-    "properties": Object {
-      "c": Object {
-        "enum": Array [
-          1,
-          2,
-          3,
-        ],
-        "type": "number",
-      },
-      "reffed": Object {
-        "items": Object {
-          "$ref": "#/definitions/IRefMe",
-        },
-        "type": "array",
-      },
-    },
-    "required": Array [
-      "c",
-      "reffed",
-    ],
-    "type": "object",
-  },
-}
-`;
-
-exports[`builderTogetherOne 1`] = `
+exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple combined schemas: builderTogetherOne 1`] = `
 Object {
   "builderTogetherOne": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
@@ -169,7 +71,7 @@ Object {
 }
 `;
 
-exports[`builderTogetherTwo 1`] = `
+exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple combined schemas: builderTogetherTwo 1`] = `
 Object {
   "builderTogetherOne": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
@@ -240,7 +142,136 @@ Object {
 }
 `;
 
-exports[`manySchemas 1`] = `
+exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple seperate schemas: builderSeperateOne 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple seperate schemas: builderSeperateTwo 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "definitions": Object {
+      "IRefMe": Object {
+        "additionalProperties": false,
+        "properties": Object {
+          "a": Object {
+            "additionalProperties": false,
+            "properties": Object {
+              "c": Object {
+                "enum": Array [
+                  1,
+                ],
+                "type": "number",
+              },
+            },
+            "required": Array [
+              "c",
+            ],
+            "type": "object",
+          },
+        },
+        "required": Array [
+          "a",
+        ],
+        "type": "object",
+      },
+    },
+    "properties": Object {
+      "c": Object {
+        "enum": Array [
+          1,
+          2,
+          3,
+        ],
+        "type": "number",
+      },
+      "reffed": Object {
+        "items": Object {
+          "$ref": "#/definitions/IRefMe",
+        },
+        "type": "array",
+      },
+    },
+    "required": Array [
+      "c",
+      "reffed",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`typeToSchema saveExports() creates a file with imports and exports: saveExports 1`] = `
+Object {
+  "a": Object {
+    "foo": 1,
+  },
+  "b": Object {
+    "bar": 2,
+  },
+}
+`;
+
+exports[`typeToSchema saveSchemas() saves a single schema as default export to a .ts file: singleSchemaDefaultExport 1`] = `
+Object {
+  "default": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`typeToSchema saveSchemas() saves a single schema to a .json file: singleSchemaJson 1`] = `
+Object {
+  "name": "Test",
+  "schema": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "type": "ITest",
+}
+`;
+
+exports[`typeToSchema saveSchemas() saves multiple schema to a .ts file: manySchemas 1`] = `
 Object {
   "Test": Object {
     "$schema": "http://json-schema.org/draft-04/schema#",
@@ -311,7 +342,90 @@ Object {
 }
 `;
 
-exports[`multipleSchemas 1`] = `
+exports[`typeToSchema typesToSchemas() produces a schema with an annotated $ref: annotatedReffedSchema 1`] = `
+Array [
+  Object {
+    "name": undefined,
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "$ref": "test-ref#",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+    "type": "IRefTest",
+  },
+]
+`;
+
+exports[`typeToSchema typesToSchemas() produces a schema with an overridden $ref: reffedSchema 1`] = `
+Array [
+  Object {
+    "name": "Test2",
+    "schema": Object {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "additionalProperties": false,
+      "definitions": Object {
+        "IRefMe": Object {
+          "$ref": "ref-me#",
+        },
+      },
+      "properties": Object {
+        "c": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "type": "number",
+        },
+        "reffed": Object {
+          "items": Object {
+            "$ref": "#/definitions/IRefMe",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "c",
+        "reffed",
+      ],
+      "type": "object",
+    },
+    "type": "ITest2",
+  },
+]
+`;
+
+exports[`typeToSchema typesToSchemas() produces a single schema from one file: singleSchema 1`] = `
+Object {
+  "name": "Test",
+  "schema": Object {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": Object {
+      "a": Object {
+        "description": "a",
+        "minimum": 1,
+        "type": "number",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  "type": "ITest",
+}
+`;
+
+exports[`typeToSchema typesToSchemas() produces multiple schemas from one file: multipleSchemas 1`] = `
 Array [
   Object {
     "name": "Test",
@@ -388,118 +502,4 @@ Array [
     "type": "ITest2",
   },
 ]
-`;
-
-exports[`reffedSchema 1`] = `
-Array [
-  Object {
-    "name": "Test2",
-    "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "additionalProperties": false,
-      "definitions": Object {
-        "IRefMe": Object {
-          "$ref": "ref-me#",
-        },
-      },
-      "properties": Object {
-        "c": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "type": "number",
-        },
-        "reffed": Object {
-          "items": Object {
-            "$ref": "#/definitions/IRefMe",
-          },
-          "type": "array",
-        },
-      },
-      "required": Array [
-        "c",
-        "reffed",
-      ],
-      "type": "object",
-    },
-    "type": "ITest2",
-  },
-]
-`;
-
-exports[`saveExports 1`] = `
-Object {
-  "a": Object {
-    "foo": 1,
-  },
-  "b": Object {
-    "bar": 2,
-  },
-}
-`;
-
-exports[`singleSchema 1`] = `
-Object {
-  "name": "Test",
-  "schema": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "additionalProperties": false,
-    "properties": Object {
-      "a": Object {
-        "description": "a",
-        "minimum": 1,
-        "type": "number",
-      },
-    },
-    "required": Array [
-      "a",
-    ],
-    "type": "object",
-  },
-  "type": "ITest",
-}
-`;
-
-exports[`singleSchemaDefaultExport 1`] = `
-Object {
-  "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "additionalProperties": false,
-    "properties": Object {
-      "a": Object {
-        "description": "a",
-        "minimum": 1,
-        "type": "number",
-      },
-    },
-    "required": Array [
-      "a",
-    ],
-    "type": "object",
-  },
-}
-`;
-
-exports[`singleSchemaJson 1`] = `
-Object {
-  "name": "Test",
-  "schema": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "additionalProperties": false,
-    "properties": Object {
-      "a": Object {
-        "description": "a",
-        "minimum": 1,
-        "type": "number",
-      },
-    },
-    "required": Array [
-      "a",
-    ],
-    "type": "object",
-  },
-  "type": "ITest",
-}
 `;
