@@ -2,6 +2,7 @@ import { map } from 'bluebird';
 import { writeFile } from 'fs-extra';
 import { clone, isArray, merge } from 'lutils';
 import { extractRefsFromConfig } from './';
+import { ISchemaShape, resolveDupes } from './lib/resolveDupes';
 import { createSchemaModuleMap, ISchemasInput, renderSchemaModuleMapToTs } from './schemaModuleMap';
 import {
   getTsProgram, ISaveSchemasConfig,
@@ -32,6 +33,7 @@ export class TypeSchemaBuilder {
   }> = [];
 
   private replaceWithRefs: boolean;
+  private deDupe: boolean;
   private emitErrors: boolean;
   private saveConfig: Partial<ISaveSchemasConfig>;
   private compileConfig: Partial<ITypesToSchemasConfig>;
@@ -40,7 +42,7 @@ export class TypeSchemaBuilder {
   constructor ({
     save = {}, compile = {},
     reuseProgram = true, replaceWithRefs = true,
-    emitErrors = true,
+    emitErrors = true, deDupe = true,
   }: {
     save?: Partial<ISaveSchemasConfig>,
     compile?: Partial<ITypesToSchemasConfig>,
@@ -51,11 +53,15 @@ export class TypeSchemaBuilder {
 
     /** Whether to emit errors to the console on compilation */
     emitErrors?: boolean;
+
+    /** Whether to de-dupe references in a schema due to a bug in the underlying library */
+    deDupe?: boolean;
   }) {
-    this.saveConfig = save;
-    this.compileConfig = compile;
-    this.replaceWithRefs = replaceWithRefs;
-    this.emitErrors = emitErrors;
+    Object.assign(this, <Partial<TypeSchemaBuilder>> {
+      saveConfig: save, compileConfig: compile,
+      replaceWithRefs, emitErrors,
+      deDupe,
+    });
 
     const { fromFiles } = this.compileConfig;
 
@@ -122,10 +128,11 @@ export class TypeSchemaBuilder {
       }
     }
 
-    // TODO: if we read the symbols without compiling schema, we may be able to extract
-    // the id annotation, then compile
-    // TODO: option two: add a recursive lookup for $ref as per the extract function
-    // and manually replace each occurance AFTER compilation
+    /**
+     * TODO: We can support ID annotation auto-parsing:
+     * - Option 1: Read symbols without compiling, should save on time
+     * - Option 2: Recurse through generated schemas and replace refs
+     */
 
     await map(this.builderConfigs, async (config) => {
       const mergedConfig = <ITypesToSchemasConfig> merge(
@@ -146,6 +153,30 @@ export class TypeSchemaBuilder {
         config,
       });
     });
+
+    if (this.deDupe) {
+      const countList: number[] = [];
+
+      let jsonSchemas: ISchemaShape[] = this.compiled
+        .reduce((prev, { schemas: schemaItems }) => {
+          countList.push(schemaItems.length);
+
+          return [...prev, ...schemaItems.map(({ schema }) => schema)];
+        }, [] as ISchemaShape[]);
+
+      jsonSchemas = resolveDupes(jsonSchemas);
+
+      this.compiled = this.compiled.map((compiled, index) => {
+        const ownedSchemas = jsonSchemas.splice(0, countList[index]);
+
+        return {
+          ...compiled,
+          schemas: compiled.schemas.map((item) => {
+            return { ...item, schema: ownedSchemas.shift() };
+          }),
+        };
+      });
+    }
 
     return this.compiled;
   }

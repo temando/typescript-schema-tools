@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.19",
+    "@types/clone": "^0.1.30",
     "@types/fs-extra": "^5.0.0",
     "@types/jest": "^21.1.9",
     "@types/node": "^8.5.2",
@@ -38,6 +39,7 @@
   "dependencies": {
     "@jdw/jst": "^2.0.0-beta.15",
     "bluebird": "^3.5.0",
+    "clone": "^2.1.1",
     "fs-extra": "^5.0.0",
     "lutils": "^2.4.0",
     "ts-json-schema-generator": "^0.16.0",

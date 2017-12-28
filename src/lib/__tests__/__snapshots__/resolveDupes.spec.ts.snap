@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolves dupes in a schema to a root 1`] = `
+Array [
+  Object {
+    "properties": Object {
+      "a": Object {
+        "$ref": "wew",
+      },
+      "b": Object {
+        "type": "string",
+      },
+      "c": Object {
+        "$ref": "wew",
+      },
+    },
+    "required": Array [
+      "a",
+    ],
+    "type": "object",
+  },
+  Object {
+    "$id": "wew",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": Object {},
+    "enum": Array [
+      "a",
+      "b",
+      "c",
+    ],
+    "type": "string",
+  },
+]
+`;

@@ -20,11 +20,12 @@ export declare class TypeSchemaBuilder {
         errors?: Error[];
     }>;
     private replaceWithRefs;
+    private deDupe;
     private emitErrors;
     private saveConfig;
     private compileConfig;
     private builderConfigs;
-    constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors}: {
+    constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe}: {
         save?: Partial<ISaveSchemasConfig>;
         compile?: Partial<ITypesToSchemasConfig>;
         reuseProgram?: boolean;
@@ -32,6 +33,8 @@ export declare class TypeSchemaBuilder {
         replaceWithRefs?: boolean;
         /** Whether to emit errors to the console on compilation */
         emitErrors?: boolean;
+        /** Whether to de-dupe references in a schema due to a bug in the underlying library */
+        deDupe?: boolean;
     });
     /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
     add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
