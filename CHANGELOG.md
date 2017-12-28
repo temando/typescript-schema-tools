@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.12.0][] - 2017-12-28
+
 ## [2.11.0][] - 2017-11-14
 
 - Added `emitErrors` config option to `TypeSchemaBuilder`
@@ -90,7 +92,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.11.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.12.0...HEAD
+[2.12.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.11.0...v2.12.0
 [2.11.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.10.0...v2.11.0
 [2.10.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.9.0...v2.10.0
 [2.9.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.8.0...v2.9.0
