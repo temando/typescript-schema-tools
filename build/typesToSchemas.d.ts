@@ -16,6 +16,8 @@ export interface ITypeMap {
     type: string;
     /** Can be used to set `schema.id` if it is not set */
     id?: string;
+    /** Whether to error on non-existance */
+    optional?: boolean;
 }
 export interface ITypesToSchemasConfig {
     /** The TS files to fetch types from, or an existing ts.Program */

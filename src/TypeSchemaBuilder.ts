@@ -88,10 +88,10 @@ export class TypeSchemaBuilder {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(
-      configs.map(({ type, name = type, id, compile = {}, save = {} }) => {
+      configs.map(({ type, name = type, id, optional = false, compile = {}, save = {} }) => {
         return merge(
           {
-            compile: { types: [{ type, name, id }] },
+            compile: { types: [{ type, name, id, optional }] },
             save: { name },
           },
           { compile, save },

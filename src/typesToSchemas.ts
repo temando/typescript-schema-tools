@@ -29,6 +29,9 @@ export interface ITypeMap {
 
   /** Can be used to set `schema.id` if it is not set */
   id?: string;
+
+  /** Whether to error on non-existance */
+  optional?: boolean;
 }
 
 export interface ITypesToSchemasConfig {
@@ -80,12 +83,14 @@ export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
 
   const generator = inputGenerator || createTypeToSchemaGenerator(config);
 
-  for (const { name, type, id } of types) {
+  for (const { name, type, id, optional } of types) {
     let schema: any;
 
     try {
       schema = generator.getSchemaForSymbol(type);
     } catch (error) {
+      if (optional) { continue; }
+
       errors.push(error);
     }
 
