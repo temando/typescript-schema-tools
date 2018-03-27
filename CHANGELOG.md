@@ -4,9 +4,11 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Added `optional` when defining ITypeMap, meaning some types wont error out the build process.
+
 ## [2.12.0][] - 2017-12-28
 
-- Added `optional` when defining ITypeMap, meaning some types wont error out the build process.
+- Misc fixes
 
 ## [2.11.0][] - 2017-11-14
 
