@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Change package name to `typescript-schema-tools`
+
 ## [2.13.0][] - 2018-03-27
 
 - Added `optional` when defining ITypeMap, meaning some types wont error out the build process.
