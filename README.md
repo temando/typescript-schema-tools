@@ -11,7 +11,7 @@ Exports tools to make converting TypeScript interfaces into JSON-Schema trivial.
 ### Single seperate schemas
 
 ```ts
-import { TypeSchemaBuilder } from '@temando/schema-tools';
+import { TypeSchemaBuilder } from 'typescript-schema-tools';
 
 (async () => {
   await new TypeSchemaBuilder({
@@ -59,7 +59,7 @@ export default {
 
 
 ```ts
-import { TypeSchemaBuilder } from '@temando/schema-tools';
+import { TypeSchemaBuilder } from 'typescript-schema-tools';
 
 (async () => {
   await new TypeSchemaBuilder({

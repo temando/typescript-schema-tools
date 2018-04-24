@@ -1,8 +1,8 @@
 {
-  "name": "@temando/schema-tools",
+  "name": "typescript-schema-tools",
   "description": "Schema tooling",
   "version": "2.13.0",
-  "license": "SEE LICENSE IN LICENCE.md",
+  "license": "MIT",
   "keywords": [
     "library"
   ],
