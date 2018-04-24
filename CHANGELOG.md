@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.14.0][] - 2018-04-24
+
 - Change package name to `typescript-schema-tools`
 
 ## [2.13.0][] - 2018-03-27
@@ -100,7 +102,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.13.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.14.0...HEAD
+[2.14.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.13.0...v2.14.0
 [2.13.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.12.0...v2.13.0
 [2.12.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.11.0...v2.12.0
 [2.11.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.10.0...v2.11.0
