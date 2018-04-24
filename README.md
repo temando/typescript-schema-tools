@@ -1,6 +1,6 @@
 # Schema Tools
 
-Exports tools to make converting TypeScript interfaces into JSON-Schema trivial.
+Exports tools to make converting TypeScript interfaces into JSON-Schema easier.
 
 #### Reference:
 - Typescript to JSON Schema Builder: [:blue_book: TypeSchemaBuilder.d.ts](build/typeToSchema.d.ts)
