@@ -8,6 +8,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [2.15.0][] - 2018-04-26
 
+- Bump underlying conversion lib
+
 ## [2.14.1][] - 2018-04-26
 
 - Bump
