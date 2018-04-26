@@ -28,7 +28,12 @@ const isSchemaADupe = (target: ISchemaShape, subject: ISchemaShape): boolean => 
 
   const simpleSubject = simplifySchema(subject);
 
-  return JSON.stringify(target) === JSON.stringify(simpleSubject);
+  const targetStr = JSON.stringify(target);
+  const subjectStr = JSON.stringify(simpleSubject);
+
+  const anyIsEmptyObject = [targetStr, subjectStr].includes('{}');
+
+  return !anyIsEmptyObject && targetStr === subjectStr;
 };
 
 const findDupeSchema = (target: ISchemaShape, schemas: ISchemaShape[]): ISchemaShape|undefined => {
