@@ -31,7 +31,7 @@ const isSchemaADupe = (target: ISchemaShape, subject: ISchemaShape): boolean => 
   const targetStr = JSON.stringify(target);
   const subjectStr = JSON.stringify(simpleSubject);
 
-  const anyIsEmptyObject = [targetStr, subjectStr].includes('{}');
+  const anyIsEmptyObject = targetStr === '{}';
 
   return !anyIsEmptyObject && targetStr === subjectStr;
 };
