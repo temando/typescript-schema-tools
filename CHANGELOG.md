@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Fix bug related to dupes picking up empty objects '{}'
+
 ## [2.15.0][] - 2018-04-26
 
 ## [2.14.1][] - 2018-04-26
