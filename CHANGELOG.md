@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+- Revert upgrade to base lib
+
 ## [2.15.1][] - 2018-04-26
 
 - Fix bug related to dupes picking up empty objects '{}'
