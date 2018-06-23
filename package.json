@@ -17,8 +17,10 @@
     "release": "cd build && yarn publish",
     "build": "bash -v -e scripts/build",
     "build:link": "yarn build && cd build && yarn link",
-    "preversion": "yarn lint && yarn build && yarn test && changelog-verify CHANGELOG.md && git add build/*.d.ts",
-    "version": "version-changelog CHANGELOG.md && git add CHANGELOG.md",
+    "changelog:verify": "changelog-verify CHANGELOG.md",
+    "changelog:version": "version-changelog CHANGELOG.md && git add CHANGELOG.md",
+    "preversion": "yarn lint && yarn build && yarn test && yarn changelog:verify && git add build/*.d.ts",
+    "version": "yarn changelog:version",
     "postversion": "yarn build"
   },
   "devDependencies": {
