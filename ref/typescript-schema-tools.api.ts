@@ -1,20 +1,20 @@
 // @public
-export function createSchemaModuleMap({schemas, moduleBase}: {
-    schemas: ISchemasInput;
-    moduleBase: string;
+export function createSchemaModuleMap ({ schemas, moduleBase }: {
+  schemas: ISchemasInput;
+  moduleBase: string;
 }): ISchemaModuleMap;
 
 // @public (undocumented)
-export function createTypeToSchemaGenerator(config: ITypesToSchemasConfig): JsonSchemaGenerator;
+export function createTypeToSchemaGenerator (config: ITypesToSchemasConfig): JsonSchemaGenerator;
 
 // @public (undocumented)
-export function extractRefsFromConfig({refOverrides, replaceWithRefs, types}: ITypesToSchemasConfig): {
-    type: string;
-    $ref: string;
-}[];
+export function extractRefsFromConfig ({ refOverrides, replaceWithRefs, types }: ITypesToSchemasConfig): Array<{
+  type: string;
+  $ref: string;
+}>;
 
 // @public (undocumented)
-export function getTsProgram(fromFiles: string[] | IProgram): IProgram;
+export function getTsProgram (fromFiles: string[] | IProgram): IProgram;
 
 // @public (undocumented)
 interface IBuilderSchemaConfig {
@@ -61,7 +61,7 @@ interface ISchemasInput {
   // (undocumented)
   __index: {
     id: string;
-  }
+  };
 }
 
 // @public (undocumented)
@@ -90,71 +90,73 @@ interface ITypesToSchemasConfig {
   // (undocumented)
   generator?: JsonSchemaGenerator;
   options?: Partial<Args>;
+  // (undocumented)
   refOverrides?: {
     [key: string]: string;
-  }
+  };
   replaceWithRefs?: boolean;
+  // (undocumented)
   types: ITypeMap[];
 }
 
 // @public (undocumented)
-export function removeUnusedJsonSchemaDefinitions(schema: any): any;
+export function removeUnusedJsonSchemaDefinitions (schema: any): any;
 
 // @public (undocumented)
-export function renderSchemaModuleMapToTs(map: ISchemaModuleMap): string;
+export function renderSchemaModuleMapToTs (map: ISchemaModuleMap): string;
 
 // @public
-export function saveExports({exports, directory, name, getImportPath, getImportPattern}: {
-    exports: string[];
-    getImportPath: IGetImportPath;
-    getImportPattern?: IGetImportPath;
-    directory: string;
-    name: string;
+export function saveExports ({ exports, directory, name, getImportPath, getImportPattern }: {
+  exports: string[];
+  getImportPath: IGetImportPath;
+  getImportPattern?: IGetImportPath;
+  directory: string;
+  name: string;
 }): Promise<void>;
 
 // @public
-export function saveSchemas({schemas, directory, name, format, asDefaultExport}: ISaveSchemasConfig): Promise<void>;
+export function saveSchemas ({ schemas, directory, name, format, asDefaultExport }: ISaveSchemasConfig): Promise<void>;
 
 // @public
 class TypeSchemaBuilder {
-  constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe}: {
-          save?: Partial<ISaveSchemasConfig>;
-          compile?: Partial<ITypesToSchemasConfig>;
-          reuseProgram?: boolean;
-          replaceWithRefs?: boolean;
-          emitErrors?: boolean;
-          deDupe?: boolean;
-      });
-  add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
-  addType(configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]): this;
+  constructor ({ save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe }: {
+    save?: Partial<ISaveSchemasConfig>;
+    compile?: Partial<ITypesToSchemasConfig>;
+    reuseProgram?: boolean;
+    replaceWithRefs?: boolean;
+    emitErrors?: boolean;
+    deDupe?: boolean;
+  });
+  add (configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;
+  addType (configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]): this;
   // (undocumented)
-  compile(): Promise<{
-          schemas: ITjsSchema[];
-          config: IBuilderSchemaConfig;
-          errors?: Error[] | undefined;
-      }[]>;
+  compile (): Promise<Array<{
+    schemas: ITjsSchema[];
+    config: IBuilderSchemaConfig;
+    errors?: Error[] | undefined;
+  }>>;
   // (undocumented)
-  compileAndSave(): Promise<this>;
+  compileAndSave (): Promise<this>;
   // (undocumented)
   compiled: Array<{
-          schemas: ITjsSchema[];
-          config: IBuilderSchemaConfig;
-          errors?: Error[];
-      }>;
+    schemas: ITjsSchema[];
+    config: IBuilderSchemaConfig;
+    errors?: Error[];
+  }>;
   // (undocumented)
-  save(compiled?: {
-          schemas: ITjsSchema[];
-          config: IBuilderSchemaConfig;
-          errors?: Error[] | undefined;
-      }[]): Promise<void>;
+  save (compiled?: Array<{
+    schemas: ITjsSchema[];
+    config: IBuilderSchemaConfig;
+    errors?: Error[] | undefined;
+  }>): Promise<void>;
   // (undocumented)
-  saveSchemaModuleMap({schemas, moduleBase, fileName}: ISchemaModuleMapParams): Promise<void>;
+  saveSchemaModuleMap ({ schemas, moduleBase, fileName }: ISchemaModuleMapParams): Promise<void>;
 }
 
 // @public
-export function typesToSchemas(config: ITypesToSchemasConfig): Promise<{
-    errors?: Error[];
-    schemas: ITjsSchema[];
+export function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
+  errors?: Error[];
+  schemas: ITjsSchema[];
 }>;
 
 // WARNING: Unsupported export: defaultOptions

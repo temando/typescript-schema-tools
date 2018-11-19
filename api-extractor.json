@@ -1,7 +1,10 @@
 {
-  "$schema": "https://dev.office.com/json-schemas/api-extractor/api-extractor.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Microsoft/web-build-tools/master/apps/api-extractor/src/extractor/api-extractor.schema.json",
   "compiler" : { "configType": "tsconfig", "rootFolder": "." },
-  "apiJsonFile": { "enabled": true, "outputFolder": "ref" },
-  "apiReviewFile": { "enabled": true, "tempFolder": "ref" },
-  "project": { "entryPointSourceFile": "build/index.d.ts" }
+  "apiJsonFile": { "enabled": false, "outputFolder": "ref" },
+  "apiReviewFile": { "enabled": true, "tempFolder": "build", "apiReviewFolder": "ref" },
+  "project": { "entryPointSourceFile": "build/index.d.ts" },
+  "validationRules": {
+    "missingReleaseTags": "allow"
+  }
 }

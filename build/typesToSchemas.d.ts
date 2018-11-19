@@ -22,12 +22,12 @@ export interface ITypeMap {
 export interface ITypesToSchemasConfig {
     /** The TS files to fetch types from, or an existing ts.Program */
     fromFiles: string[] | IProgram;
-    /** A hash of { [exportName]: typeName } */
+    /** A hash of `{ [exportName]: typeName }` */
     types: ITypeMap[];
     /** TJS options to override */
     options?: Partial<Args>;
     dereference?: boolean;
-    /** A hash of [type]: id for generating { $ref: id } in place of inline schemas */
+    /** A hash of `[type]: id` for generating `{ $ref: id }` in place of inline schemas */
     refOverrides?: {
         [key: string]: string;
     };
@@ -56,7 +56,7 @@ export interface ISaveSchemasConfig {
     /**
      * Whether to export as a default when `ts` format selected and `schemas` has a length of 1
      *
-     * @default false
+     * Default: false
      */
     asDefaultExport: boolean;
     /**
