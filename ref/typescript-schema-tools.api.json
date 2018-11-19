@@ -1,0 +1,1177 @@
+{
+  "kind": "package",
+  "name": "typescript-schema-tools",
+  "summary": [],
+  "remarks": [],
+  "exports": {
+    "createSchemaModuleMap": {
+      "kind": "function",
+      "signature": "export function createSchemaModuleMap({schemas, moduleBase}: {\n    schemas: ISchemasInput;\n    moduleBase: string;\n}): ISchemaModuleMap;",
+      "returnValue": {
+        "type": "ISchemaModuleMap",
+        "description": []
+      },
+      "parameters": {
+        "__0": {
+          "name": "__0",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "{\n    /** JSON Schemas, with id's */\n    schemas: ISchemasInput;\n    /** The base for generated module paths, eg. \"@mydomain/my-module/my-schema-folder\" */\n    moduleBase: string;\n}"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [
+        {
+          "kind": "text",
+          "text": "Create a [schema.id]: "
+        },
+        {
+          "kind": "html-tag",
+          "token": "<modulePath>"
+        },
+        {
+          "kind": "text",
+          "text": " map file"
+        }
+      ],
+      "remarks": [],
+      "isBeta": false
+    },
+    "createTypeToSchemaGenerator": {
+      "kind": "function",
+      "signature": "export function createTypeToSchemaGenerator(config: ITypesToSchemasConfig): JsonSchemaGenerator;",
+      "returnValue": {
+        "type": "JsonSchemaGenerator",
+        "description": []
+      },
+      "parameters": {
+        "config": {
+          "name": "config",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "ITypesToSchemasConfig"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false
+    },
+    "extractRefsFromConfig": {
+      "kind": "function",
+      "signature": "export function extractRefsFromConfig({refOverrides, replaceWithRefs, types}: ITypesToSchemasConfig): {\n    type: string;\n    $ref: string;\n}[];",
+      "returnValue": {
+        "type": "{\n    type: string;\n    $ref: string;\n}[]",
+        "description": []
+      },
+      "parameters": {
+        "__0": {
+          "name": "__0",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "ITypesToSchemasConfig"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false
+    },
+    "getTsProgram": {
+      "kind": "function",
+      "signature": "export function getTsProgram(fromFiles: string[] | IProgram): IProgram;",
+      "returnValue": {
+        "type": "IProgram",
+        "description": []
+      },
+      "parameters": {
+        "fromFiles": {
+          "name": "fromFiles",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "string[] | IProgram"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false
+    },
+    "IBuilderSchemaConfig": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "compile": {
+          "kind": "property",
+          "signature": "compile?: Partial<ITypesToSchemasConfig>;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "Partial<ITypesToSchemasConfig>",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "save": {
+          "kind": "property",
+          "signature": "save?: Partial<ISaveSchemasConfig>;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "Partial<ISaveSchemasConfig>",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "IProgram": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "__index": {
+          "kind": "method",
+          "signature": "[key: string]: any;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "any",
+            "description": []
+          },
+          "parameters": {
+            "key": {
+              "name": "key",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "string"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        }
+      }
+    },
+    "ISaveSchemasConfig": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "asDefaultExport": {
+          "kind": "property",
+          "signature": "asDefaultExport: boolean;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "boolean",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Whether to export as a default when "
+            },
+            {
+              "kind": "code",
+              "text": "ts",
+              "highlighter": "plain"
+            },
+            {
+              "kind": "text",
+              "text": " format selected and "
+            },
+            {
+              "kind": "code",
+              "text": "schemas",
+              "highlighter": "plain"
+            },
+            {
+              "kind": "text",
+              "text": " has a length of 1"
+            },
+            {
+              "kind": "paragraph"
+            },
+            {
+              "kind": "text",
+              "text": " false"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "directory": {
+          "kind": "property",
+          "signature": "directory: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "The absolute path to the save directory"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "format": {
+          "kind": "property",
+          "signature": "format: 'ts' | 'json';",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "'ts' | 'json'",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "The file format to save as"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "name": {
+          "kind": "property",
+          "signature": "name: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "The name of the saved file, without extension."
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "schemas": {
+          "kind": "property",
+          "signature": "schemas: ITjsSchema[];",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "ITjsSchema[]",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "ISchemaModuleMap": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "__index": {
+          "kind": "method",
+          "signature": "[k: string]: string;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "string",
+            "description": []
+          },
+          "parameters": {
+            "k": {
+              "name": "k",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "string"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        }
+      }
+    },
+    "ISchemaModuleMapParams": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "fileName": {
+          "kind": "property",
+          "signature": "fileName: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "moduleBase": {
+          "kind": "property",
+          "signature": "moduleBase: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "schemas": {
+          "kind": "property",
+          "signature": "schemas: ISchemasInput;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "ISchemasInput",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "ISchemasInput": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "__index": {
+          "kind": "method",
+          "signature": "__index:",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "{\n        id: string;\n    }",
+            "description": []
+          },
+          "parameters": {
+            "k": {
+              "name": "k",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "string"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        }
+      }
+    },
+    "ITjsSchema": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "name": {
+          "kind": "property",
+          "signature": "name?: string;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "schema": {
+          "kind": "property",
+          "signature": "schema: any;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "any",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "type": {
+          "kind": "property",
+          "signature": "type: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "ITypeMap": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "id": {
+          "kind": "property",
+          "signature": "id?: string;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Can be used to set "
+            },
+            {
+              "kind": "code",
+              "text": "schema.id",
+              "highlighter": "plain"
+            },
+            {
+              "kind": "text",
+              "text": " if it is not set"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "name": {
+          "kind": "property",
+          "signature": "name?: string;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Required when "
+            },
+            {
+              "kind": "code",
+              "text": "asDefaultExport",
+              "highlighter": "plain"
+            },
+            {
+              "kind": "text",
+              "text": " is "
+            },
+            {
+              "kind": "code",
+              "text": "false",
+              "highlighter": "plain"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "optional": {
+          "kind": "property",
+          "signature": "optional?: boolean;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "boolean",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Whether to error on non-existance"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "type": {
+          "kind": "property",
+          "signature": "type: string;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "The typescript type to generate from"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "ITypesToSchemasConfig": {
+      "kind": "interface",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "dereference": {
+          "kind": "property",
+          "signature": "dereference?: boolean;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "boolean",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "fromFiles": {
+          "kind": "property",
+          "signature": "fromFiles: string[] | IProgram;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "string[] | IProgram",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "The TS files to fetch types from, or an existing ts.Program"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "generator": {
+          "kind": "property",
+          "signature": "generator?: JsonSchemaGenerator;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "JsonSchemaGenerator",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "options": {
+          "kind": "property",
+          "signature": "options?: Partial<Args>;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "Partial<Args>",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "TJS options to override"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "refOverrides": {
+          "kind": "property",
+          "signature": "refOverrides?:",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "{\n        [key: string]: string;\n    }",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "A hash of [type]: id for generating { $ref: id } in place of inline schemas"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "replaceWithRefs": {
+          "kind": "property",
+          "signature": "replaceWithRefs?: boolean;",
+          "isOptional": true,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "boolean",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Replace all types with $ref to their ids instead of inlining them"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "types": {
+          "kind": "property",
+          "signature": "types: ITypeMap[];",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "ITypeMap[]",
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "A hash of { [exportName]: typeName }"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        }
+      }
+    },
+    "removeUnusedJsonSchemaDefinitions": {
+      "kind": "function",
+      "signature": "export function removeUnusedJsonSchemaDefinitions(schema: any): any;",
+      "returnValue": {
+        "type": "any",
+        "description": []
+      },
+      "parameters": {
+        "schema": {
+          "name": "schema",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "any"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false
+    },
+    "renderSchemaModuleMapToTs": {
+      "kind": "function",
+      "signature": "export function renderSchemaModuleMapToTs(map: ISchemaModuleMap): string;",
+      "returnValue": {
+        "type": "string",
+        "description": []
+      },
+      "parameters": {
+        "map": {
+          "name": "map",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "ISchemaModuleMap"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [],
+      "remarks": [],
+      "isBeta": false
+    },
+    "saveExports": {
+      "kind": "function",
+      "signature": "export function saveExports({exports, directory, name, getImportPath, getImportPattern}: {\n    exports: string[];\n    getImportPath: IGetImportPath;\n    getImportPattern?: IGetImportPath;\n    directory: string;\n    name: string;\n}): Promise<void>;",
+      "returnValue": {
+        "type": "Promise<void>",
+        "description": []
+      },
+      "parameters": {
+        "__0": {
+          "name": "__0",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "{\n    /** Names of export names */\n    exports: string[];\n    /** Should return a valid relative import path for the destination directory */\n    getImportPath: IGetImportPath;\n    /** (Optional) Defaults to returning `* as ${name}` in an import statement. Must resolve to a single `name` */\n    getImportPattern?: IGetImportPath;\n    /** Save directory */\n    directory: string;\n    name: string;\n}"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [
+        {
+          "kind": "text",
+          "text": "Creates an index file wiring up imports and exports"
+        }
+      ],
+      "remarks": [],
+      "isBeta": false
+    },
+    "saveSchemas": {
+      "kind": "function",
+      "signature": "export function saveSchemas({schemas, directory, name, format, asDefaultExport}: ISaveSchemasConfig): Promise<void>;",
+      "returnValue": {
+        "type": "Promise<void>",
+        "description": []
+      },
+      "parameters": {
+        "__0": {
+          "name": "__0",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "ISaveSchemasConfig"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [
+        {
+          "kind": "text",
+          "text": "Saves schemas as multiple format, to a "
+        },
+        {
+          "kind": "code",
+          "text": ".ts",
+          "highlighter": "plain"
+        },
+        {
+          "kind": "text",
+          "text": " or "
+        },
+        {
+          "kind": "code",
+          "text": ".json",
+          "highlighter": "plain"
+        },
+        {
+          "kind": "text",
+          "text": " file, based on provided options."
+        }
+      ],
+      "remarks": [],
+      "isBeta": false
+    },
+    "TypeSchemaBuilder": {
+      "kind": "class",
+      "extends": "",
+      "implements": "",
+      "typeParameters": [],
+      "deprecatedMessage": [],
+      "summary": [
+        {
+          "kind": "text",
+          "text": "An friendlier API for building multiple schemas by sharing configurations"
+        }
+      ],
+      "remarks": [],
+      "isBeta": false,
+      "isSealed": false,
+      "members": {
+        "__constructor": {
+          "kind": "constructor",
+          "signature": "constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe}: {\n        save?: Partial<ISaveSchemasConfig>;\n        compile?: Partial<ITypesToSchemasConfig>;\n        reuseProgram?: boolean;\n        replaceWithRefs?: boolean;\n        emitErrors?: boolean;\n        deDupe?: boolean;\n    });",
+          "parameters": {
+            "__0": {
+              "name": "__0",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "{\n        save?: Partial<ISaveSchemasConfig>;\n        compile?: Partial<ITypesToSchemasConfig>;\n        reuseProgram?: boolean;\n        /** Whether to resolve all schemas to $ref's when possible */\n        replaceWithRefs?: boolean;\n        /** Whether to emit errors to the console on compilation */\n        emitErrors?: boolean;\n        /** Whether to de-dupe references in a schema due to a bug in the underlying library */\n        deDupe?: boolean;\n    }"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Constructs a new instance of the "
+            },
+            {
+              "kind": "api-link",
+              "elements": [
+                {
+                  "kind": "text",
+                  "text": "TypeSchemaBuilder"
+                }
+              ],
+              "target": {
+                "scopeName": "",
+                "packageName": "typescript-schema-tools",
+                "exportName": "TypeSchemaBuilder",
+                "memberName": ""
+              }
+            },
+            {
+              "kind": "text",
+              "text": " class"
+            }
+          ],
+          "remarks": []
+        },
+        "add": {
+          "kind": "method",
+          "signature": "add(configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]): this;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "this",
+            "description": []
+          },
+          "parameters": {
+            "configs": {
+              "name": "configs",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "IBuilderSchemaConfig | IBuilderSchemaConfig[]"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "Add a IBuilderSchemaConfig to compile. Overrides any default values"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        },
+        "addType": {
+          "kind": "method",
+          "signature": "addType(configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]): this;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "this",
+            "description": []
+          },
+          "parameters": {
+            "configs": {
+              "name": "configs",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "ITypeMapBuilderConfig | ITypeMapBuilderConfig[]"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [
+            {
+              "kind": "text",
+              "text": "A simplified method, like #add(), to map a type to a name"
+            }
+          ],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        },
+        "compile": {
+          "kind": "method",
+          "signature": "compile(): Promise<{\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[] | undefined;\n    }[]>;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "Promise<{\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[] | undefined;\n    }[]>",
+            "description": []
+          },
+          "parameters": {},
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        },
+        "compileAndSave": {
+          "kind": "method",
+          "signature": "compileAndSave(): Promise<this>;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "Promise<this>",
+            "description": []
+          },
+          "parameters": {},
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        },
+        "compiled": {
+          "kind": "property",
+          "signature": "compiled: Array<{\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[];\n    }>;",
+          "isOptional": false,
+          "isReadOnly": false,
+          "isStatic": false,
+          "type": "Array<{\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[];\n    }>",
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false,
+          "isEventProperty": false
+        },
+        "save": {
+          "kind": "method",
+          "signature": "save(compiled?: {\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[] | undefined;\n    }[]): Promise<void>;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "Promise<void>",
+            "description": []
+          },
+          "parameters": {
+            "compiled": {
+              "name": "compiled",
+              "description": [],
+              "isOptional": true,
+              "isSpread": false,
+              "type": "{\n        schemas: ITjsSchema[];\n        config: IBuilderSchemaConfig;\n        errors?: Error[] | undefined;\n    }[]"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        },
+        "saveSchemaModuleMap": {
+          "kind": "method",
+          "signature": "saveSchemaModuleMap({schemas, moduleBase, fileName}: ISchemaModuleMapParams): Promise<void>;",
+          "accessModifier": "",
+          "isOptional": false,
+          "isStatic": false,
+          "returnValue": {
+            "type": "Promise<void>",
+            "description": []
+          },
+          "parameters": {
+            "__0": {
+              "name": "__0",
+              "description": [],
+              "isOptional": false,
+              "isSpread": false,
+              "type": "ISchemaModuleMapParams"
+            }
+          },
+          "deprecatedMessage": [],
+          "summary": [],
+          "remarks": [],
+          "isBeta": false,
+          "isSealed": false,
+          "isVirtual": false,
+          "isOverride": false
+        }
+      }
+    },
+    "typesToSchemas": {
+      "kind": "function",
+      "signature": "export function typesToSchemas(config: ITypesToSchemasConfig): Promise<{\n    errors?: Error[];\n    schemas: ITjsSchema[];\n}>;",
+      "returnValue": {
+        "type": "Promise<{\n    errors?: Error[];\n    schemas: ITjsSchema[];\n}>",
+        "description": []
+      },
+      "parameters": {
+        "config": {
+          "name": "config",
+          "description": [],
+          "isOptional": false,
+          "isSpread": false,
+          "type": "ITypesToSchemasConfig"
+        }
+      },
+      "deprecatedMessage": [],
+      "summary": [
+        {
+          "kind": "text",
+          "text": "Reads TypeScript files using "
+        },
+        {
+          "kind": "code",
+          "text": "typescript-json-schema",
+          "highlighter": "plain"
+        },
+        {
+          "kind": "text",
+          "text": " and returns both errors and the resulting schemas."
+        }
+      ],
+      "remarks": [],
+      "isBeta": false
+    }
+  }
+}

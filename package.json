@@ -24,6 +24,7 @@
     "postversion": "yarn build"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^6.1.6",
     "@types/bluebird": "^3.5.19",
     "@types/clone": "^0.1.30",
     "@types/fs-extra": "^5.0.0",
