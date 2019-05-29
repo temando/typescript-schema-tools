@@ -9,7 +9,7 @@ export interface ISchemasInput {
 /**
  * Create a [schema.id]: <modulePath> map file
  */
-export declare function createSchemaModuleMap({schemas, moduleBase}: {
+export declare function createSchemaModuleMap({ schemas, moduleBase }: {
     /** JSON Schemas, with id's */
     schemas: ISchemasInput;
     /** The base for generated module paths, eg. "@mydomain/my-module/my-schema-folder" */

@@ -3,7 +3,7 @@
 exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple combined schemas: builderTogetherOne 1`] = `
 Object {
   "builderTogetherOne": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -18,7 +18,7 @@ Object {
     "type": "object",
   },
   "builderTogetherTwo": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": Object {
       "IRefMe": Object {
@@ -74,7 +74,7 @@ Object {
 exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple combined schemas: builderTogetherTwo 1`] = `
 Object {
   "builderTogetherOne": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -89,7 +89,7 @@ Object {
     "type": "object",
   },
   "builderTogetherTwo": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": Object {
       "IRefMe": Object {
@@ -145,7 +145,7 @@ Object {
 exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple seperate schemas: builderSeperateOne 1`] = `
 Object {
   "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -165,7 +165,7 @@ Object {
 exports[`typeToSchema TypeSchemaBuilder compiles and saves multiple seperate schemas: builderSeperateTwo 1`] = `
 Object {
   "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": Object {
       "IRefMe": Object {
@@ -232,7 +232,7 @@ Object {
 exports[`typeToSchema saveSchemas() saves a single schema as default export to a .ts file: singleSchemaDefaultExport 1`] = `
 Object {
   "default": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -253,7 +253,7 @@ exports[`typeToSchema saveSchemas() saves a single schema to a .json file: singl
 Object {
   "name": "Test",
   "schema": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -274,7 +274,7 @@ Object {
 exports[`typeToSchema saveSchemas() saves multiple schema to a .ts file: manySchemas 1`] = `
 Object {
   "Test": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -289,7 +289,7 @@ Object {
     "type": "object",
   },
   "Test2": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "definitions": Object {
       "IRefMe": Object {
@@ -347,7 +347,7 @@ Array [
   Object {
     "name": undefined,
     "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
       "additionalProperties": false,
       "properties": Object {
         "a": Object {
@@ -369,7 +369,7 @@ Array [
   Object {
     "name": "Test2",
     "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
       "additionalProperties": false,
       "definitions": Object {
         "IRefMe": Object {
@@ -407,7 +407,7 @@ exports[`typeToSchema typesToSchemas() produces a single schema from one file: s
 Object {
   "name": "Test",
   "schema": Object {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": false,
     "properties": Object {
       "a": Object {
@@ -430,7 +430,7 @@ Array [
   Object {
     "name": "Test",
     "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
       "additionalProperties": false,
       "properties": Object {
         "a": Object {
@@ -449,7 +449,7 @@ Array [
   Object {
     "name": "Test2",
     "schema": Object {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
       "additionalProperties": false,
       "definitions": Object {
         "IRefMe": Object {

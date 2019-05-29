@@ -1,13 +1,12 @@
 import { map } from 'bluebird';
 import { writeFile } from 'fs-extra';
 import { clone, isArray, merge } from 'lutils';
+
 import { extractRefsFromConfig } from './';
 import { ISchemaShape, resolveDupes } from './lib/resolveDupes';
 import { createSchemaModuleMap, ISchemasInput, renderSchemaModuleMapToTs } from './schemaModuleMap';
 import {
-  getTsProgram, ISaveSchemasConfig,
-  ITjsSchema, ITypeMap, ITypesToSchemasConfig,
-  saveSchemas, typesToSchemas,
+  getTsProgram, ISaveSchemasConfig, ITjsSchema, ITypeMap, ITypesToSchemasConfig, saveSchemas, typesToSchemas,
 } from './typesToSchemas';
 
 export interface IBuilderSchemaConfig {
@@ -32,11 +31,11 @@ export class TypeSchemaBuilder {
     errors?: Error[],
   }> = [];
 
-  private replaceWithRefs: boolean;
-  private deDupe: boolean;
-  private emitErrors: boolean;
-  private saveConfig: Partial<ISaveSchemasConfig>;
-  private compileConfig: Partial<ITypesToSchemasConfig>;
+  private replaceWithRefs!: boolean;
+  private deDupe!: boolean;
+  private emitErrors!: boolean;
+  private saveConfig!: Partial<ISaveSchemasConfig>;
+  private compileConfig!: Partial<ITypesToSchemasConfig>;
   private builderConfigs: IBuilderSchemaConfig[] = [];
 
   constructor ({
@@ -75,7 +74,7 @@ export class TypeSchemaBuilder {
   //
 
   /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
-  add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
+  add (configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.builderConfigs.push(...configs);
@@ -84,7 +83,7 @@ export class TypeSchemaBuilder {
   }
 
   /** A simplified method, like #add(), to map a type to a name */
-  addType (configs: ITypeMapBuilderConfig|ITypeMapBuilderConfig[]) {
+  addType (configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(

@@ -22,12 +22,12 @@ export interface ITypeMap {
 export interface ITypesToSchemasConfig {
     /** The TS files to fetch types from, or an existing ts.Program */
     fromFiles: string[] | IProgram;
-    /** A hash of { [exportName]: typeName } */
+    /** A hash of `{ [exportName]: typeName }` */
     types: ITypeMap[];
     /** TJS options to override */
     options?: Partial<Args>;
     dereference?: boolean;
-    /** A hash of [type]: id for generating { $ref: id } in place of inline schemas */
+    /** A hash of `[type]: id` for generating `{ $ref: id }` in place of inline schemas */
     refOverrides?: {
         [key: string]: string;
     };
@@ -44,7 +44,7 @@ export declare function typesToSchemas(config: ITypesToSchemasConfig): Promise<{
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
-export declare function extractRefsFromConfig({refOverrides, replaceWithRefs, types}: ITypesToSchemasConfig): {
+export declare function extractRefsFromConfig({ refOverrides, replaceWithRefs, types }: ITypesToSchemasConfig): {
     type: string;
     $ref: string;
 }[];
@@ -56,7 +56,7 @@ export interface ISaveSchemasConfig {
     /**
      * Whether to export as a default when `ts` format selected and `schemas` has a length of 1
      *
-     * @default false
+     * Default: false
      */
     asDefaultExport: boolean;
     /**
@@ -70,11 +70,11 @@ export interface ISaveSchemasConfig {
 /**
  * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
  */
-export declare function saveSchemas({schemas, directory, name, format, asDefaultExport}: ISaveSchemasConfig): Promise<void>;
+export declare function saveSchemas({ schemas, directory, name, format, asDefaultExport }: ISaveSchemasConfig): Promise<void>;
 /**
  * Creates an index file wiring up imports and exports
  */
-export declare function saveExports({exports, directory, name, getImportPath, getImportPattern}: {
+export declare function saveExports({ exports, directory, name, getImportPath, getImportPattern }: {
     /** Names of export names */
     exports: string[];
     /** Should return a valid relative import path for the destination directory */

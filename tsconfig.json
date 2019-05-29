@@ -15,11 +15,7 @@
       "dom"
     ]
   },
-  "exclude": [
-    "node_modules",
-    "build/**/*"
-  ],
   "include": [
-    "src/**/*"
+    "src"
   ]
 }

@@ -12,3 +12,5 @@ rsync -am  ./src/* ./build --exclude '*.ts' --exclude '*.snap'
 
 # Build typescript
 yarn tsc
+
+cd build && ln -s ../node_modules node_modules

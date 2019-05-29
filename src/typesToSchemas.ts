@@ -3,6 +3,7 @@ import { mkdirs, writeFile } from 'fs-extra';
 import { isArray } from 'lutils';
 import { join } from 'path';
 import { Args, buildGenerator, getProgramFromFiles, JsonSchemaGenerator } from 'typescript-json-schema';
+
 import { IGetImportPath, renderExportsToTs, renderSchemasToJson, renderSchemasToTs } from './lib/schemaRenderers';
 
 export interface ITjsSchema {
@@ -38,7 +39,7 @@ export interface ITypesToSchemasConfig {
   /** The TS files to fetch types from, or an existing ts.Program */
   fromFiles: string[] | IProgram;
 
-  /** A hash of { [exportName]: typeName } */
+  /** A hash of `{ [exportName]: typeName }` */
   types: ITypeMap[];
 
   /** TJS options to override */
@@ -46,7 +47,7 @@ export interface ITypesToSchemasConfig {
 
   dereference?: boolean;
 
-  /** A hash of [type]: id for generating { $ref: id } in place of inline schemas */
+  /** A hash of `[type]: id` for generating `{ $ref: id }` in place of inline schemas */
   refOverrides?: { [key: string]: string };
 
   /** Replace all types with $ref to their ids instead of inlining them */
@@ -56,7 +57,7 @@ export interface ITypesToSchemasConfig {
 
 }
 
-export function getTsProgram (fromFiles: string[]|IProgram): IProgram {
+export function getTsProgram (fromFiles: string[] | IProgram): IProgram {
   const program = isArray(fromFiles)
     ? getProgramFromFiles(fromFiles as any)
     : fromFiles;
@@ -83,6 +84,10 @@ export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
 
   const generator = inputGenerator || createTypeToSchemaGenerator(config);
 
+  if (!generator) {
+    throw new Error('Failure to create a generator for in `typesToSchemas`');
+  }
+
   for (const { name, type, id, optional } of types) {
     let schema: any;
 
@@ -95,7 +100,7 @@ export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
     }
 
     if (schema) {
-      if (id && !schema.id) { schema.id = id; }
+      if (id && !schema.$id) { schema.$id = id; }
 
       schema = removeUnusedJsonSchemaDefinitions(schema);
 
@@ -201,7 +206,7 @@ export interface ISaveSchemasConfig {
   /**
    * Whether to export as a default when `ts` format selected and `schemas` has a length of 1
    *
-   * @default false
+   * Default: false
    */
   asDefaultExport: boolean;
 
