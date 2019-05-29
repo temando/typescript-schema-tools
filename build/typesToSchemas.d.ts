@@ -44,7 +44,7 @@ export declare function typesToSchemas(config: ITypesToSchemasConfig): Promise<{
     errors?: Error[];
     schemas: ITjsSchema[];
 }>;
-export declare function extractRefsFromConfig({refOverrides, replaceWithRefs, types}: ITypesToSchemasConfig): {
+export declare function extractRefsFromConfig({ refOverrides, replaceWithRefs, types }: ITypesToSchemasConfig): {
     type: string;
     $ref: string;
 }[];
@@ -70,11 +70,11 @@ export interface ISaveSchemasConfig {
 /**
  * Saves schemas as multiple format, to a `.ts` or `.json` file, based on provided options.
  */
-export declare function saveSchemas({schemas, directory, name, format, asDefaultExport}: ISaveSchemasConfig): Promise<void>;
+export declare function saveSchemas({ schemas, directory, name, format, asDefaultExport }: ISaveSchemasConfig): Promise<void>;
 /**
  * Creates an index file wiring up imports and exports
  */
-export declare function saveExports({exports, directory, name, getImportPath, getImportPattern}: {
+export declare function saveExports({ exports, directory, name, getImportPath, getImportPattern }: {
     /** Names of export names */
     exports: string[];
     /** Should return a valid relative import path for the destination directory */

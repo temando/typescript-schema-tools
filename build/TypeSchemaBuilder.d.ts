@@ -25,7 +25,7 @@ export declare class TypeSchemaBuilder {
     private saveConfig;
     private compileConfig;
     private builderConfigs;
-    constructor({save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe}: {
+    constructor({ save, compile, reuseProgram, replaceWithRefs, emitErrors, deDupe, }: {
         save?: Partial<ISaveSchemasConfig>;
         compile?: Partial<ITypesToSchemasConfig>;
         reuseProgram?: boolean;
@@ -51,5 +51,5 @@ export declare class TypeSchemaBuilder {
         config: IBuilderSchemaConfig;
         errors?: Error[] | undefined;
     }[]): Promise<void>;
-    saveSchemaModuleMap({schemas, moduleBase, fileName}: ISchemaModuleMapParams): Promise<void>;
+    saveSchemaModuleMap({ schemas, moduleBase, fileName }: ISchemaModuleMapParams): Promise<void>;
 }
