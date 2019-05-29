@@ -57,7 +57,7 @@ export interface ITypesToSchemasConfig {
 
 }
 
-export function getTsProgram (fromFiles: string[]|IProgram): IProgram {
+export function getTsProgram (fromFiles: string[] | IProgram): IProgram {
   const program = isArray(fromFiles)
     ? getProgramFromFiles(fromFiles as any)
     : fromFiles;
@@ -84,6 +84,10 @@ export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
 
   const generator = inputGenerator || createTypeToSchemaGenerator(config);
 
+  if (!generator) {
+    throw new Error('Failure to create a generator for in `typesToSchemas`');
+  }
+
   for (const { name, type, id, optional } of types) {
     let schema: any;
 
@@ -96,7 +100,7 @@ export async function typesToSchemas (config: ITypesToSchemasConfig): Promise<{
     }
 
     if (schema) {
-      if (id && !schema.id) { schema.id = id; }
+      if (id && !schema.$id) { schema.$id = id; }
 
       schema = removeUnusedJsonSchemaDefinitions(schema);
 
@@ -183,6 +187,15 @@ export function createTypeToSchemaGenerator (config: ITypesToSchemasConfig) {
     ...defaultOptions,
     ...options,
   });
+
+  if (!generator) {
+    console.log({
+      noGeneratorBuilt: generator,
+      program,
+      fromFiles,
+      options,
+    });
+  }
 
   const refsToReplace = extractRefsFromConfig(config);
 
