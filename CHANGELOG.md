@@ -4,6 +4,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [2.17.0][] - 2019-05-29
+
 ## [2.16.0][] - 2018-04-27
 
 - Revert upgrade to base lib
@@ -118,7 +120,8 @@ The format: [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix dependency for typescript-json-schema being a --dev
 
 
-[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.16.0...HEAD
+[Unreleased]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.17.0...HEAD
+[2.17.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.16.0...v2.17.0
 [2.16.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.15.1...v2.16.0
 [2.15.1]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.15.0...v2.15.1
 [2.15.0]: https://src.temando.io/sam.johnson/schema-tools/compare/v2.14.1...v2.15.0
