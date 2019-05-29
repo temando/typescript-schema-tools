@@ -36,7 +36,7 @@ const isSchemaADupe = (target: ISchemaShape, subject: ISchemaShape): boolean => 
   return !isEmpty && targetStr === subjectStr;
 };
 
-const findDupeSchema = (target: ISchemaShape, schemas: ISchemaShape[]): ISchemaShape|undefined => {
+const findDupeSchema = (target: ISchemaShape, schemas: ISchemaShape[]): ISchemaShape | undefined => {
   for (const schema of schemas) {
     if (isSchemaADupe(target, schema)) {
       return schema;
