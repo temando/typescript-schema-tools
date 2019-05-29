@@ -74,7 +74,7 @@ export class TypeSchemaBuilder {
   //
 
   /** Add a IBuilderSchemaConfig to compile. Overrides any default values */
-  add (configs: IBuilderSchemaConfig|IBuilderSchemaConfig[]) {
+  add (configs: IBuilderSchemaConfig | IBuilderSchemaConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.builderConfigs.push(...configs);
@@ -83,7 +83,7 @@ export class TypeSchemaBuilder {
   }
 
   /** A simplified method, like #add(), to map a type to a name */
-  addType (configs: ITypeMapBuilderConfig|ITypeMapBuilderConfig[]) {
+  addType (configs: ITypeMapBuilderConfig | ITypeMapBuilderConfig[]) {
     if (!isArray(configs)) { configs = [configs]; }
 
     this.add(

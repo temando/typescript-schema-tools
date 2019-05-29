@@ -188,15 +188,6 @@ export function createTypeToSchemaGenerator (config: ITypesToSchemasConfig) {
     ...options,
   });
 
-  if (!generator) {
-    console.log({
-      noGeneratorBuilt: generator,
-      program,
-      fromFiles,
-      options,
-    });
-  }
-
   const refsToReplace = extractRefsFromConfig(config);
 
   // Set the overrides for $refs in the generator
